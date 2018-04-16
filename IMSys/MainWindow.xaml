@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <DataGrid Name="Inventory" />
+        <DataGrid Name="Inventory" /><!--ha 2 -->
     </Grid>
 </Window>
