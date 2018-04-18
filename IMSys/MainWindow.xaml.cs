@@ -16,37 +16,36 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 
+
 namespace IMSys
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
-        IMSysDBDataSetTableAdapters.InventoryTableAdapter inventoryAdapter = new IMSysDBDataSetTableAdapters.InventoryTableAdapter();
+        static MainWindow()
+        {
+            Application.Current.Properties["inventory"] = new IMSysDBDataSetTableAdapters.InventoryTableAdapter();
+        }
+
+        IMSysDBDataSetTableAdapters.InventoryTableAdapter inventoryAdapter = Application.Current.Properties["inventory"] as IMSysDBDataSetTableAdapters.InventoryTableAdapter;
+
         public MainWindow()
         {
+           
             InitializeComponent();
 
+            
             Inventory.ItemsSource = inventoryAdapter.GetData();
         }
 
         private void Inventory_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            //SqlCommandBuilder scb = new SqlCommandBuilder();
-            //scb.ConflictOption = System.Data.ConflictOption.OverwriteChanges;
-            //inventoryAdapter.Adapter.UpdateCommand = scb.GetUpdateCommand();
             TextBox t = e.EditingElement as TextBox;  // Assumes columns are all TextBoxes
-            DataGridColumn dgc = e.Column;
-
-            Debug.WriteLine(t.Text .ToString());
-
-            /*
-            Console.WriteLine("Edited inventory: ");
-            foreach (var item in Inventory.ItemsSource)
-                Console.WriteLine((item as IMSysDBDataSet.InventoryRow).itemName);
-            inventoryAdapter.Update(Inventory.ItemsSource as IMSysDBDataSet.InventoryDataTable);
-            */
+            IMSysDBDataSet.InventoryRow inventoryRow = (e.Row.DataContext as System.Data.DataRowView).Row as IMSysDBDataSet.InventoryRow;
+            DataGridColumn dataGridColumn = e.Column;                               
+            inventoryAdapter.UpdateRow(inventoryRow.liId, t.Text, inventoryRow.Price, inventoryRow.Quantity, inventoryRow.Unit, inventoryRow.Value);
+            Debug.WriteLine(inventoryRow.liId + "\n" + t.Text + "\n" + inventoryRow.Price + "\n" + inventoryRow.Quantity + "\n" + inventoryRow.Unit + "\n" + inventoryRow.Value);
         }
+        
     }
 }

@@ -285,7 +285,7 @@ namespace IMSys {
             
             private global::System.Data.DataColumn columnPrice;
             
-            private global::System.Data.DataColumn columnStock;
+            private global::System.Data.DataColumn columnQuantity;
             
             private global::System.Data.DataColumn columnUnit;
             
@@ -350,9 +350,9 @@ namespace IMSys {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn StockColumn {
+            public global::System.Data.DataColumn QuantityColumn {
                 get {
-                    return this.columnStock;
+                    return this.columnQuantity;
                 }
             }
             
@@ -409,13 +409,13 @@ namespace IMSys {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public InventoryRow AddInventoryRow(string itemName, decimal Price, int Stock, string Unit, decimal Value) {
+            public InventoryRow AddInventoryRow(string itemName, decimal Price, int Quantity, string Unit, decimal Value) {
                 InventoryRow rowInventoryRow = ((InventoryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         itemName,
                         Price,
-                        Stock,
+                        Quantity,
                         Unit,
                         Value};
                 rowInventoryRow.ItemArray = columnValuesArray;
@@ -443,7 +443,7 @@ namespace IMSys {
                 this.columnliId = base.Columns["liId"];
                 this.columnitemName = base.Columns["itemName"];
                 this.columnPrice = base.Columns["Price"];
-                this.columnStock = base.Columns["Stock"];
+                this.columnQuantity = base.Columns["Quantity"];
                 this.columnUnit = base.Columns["Unit"];
                 this.columnValue = base.Columns["Value"];
             }
@@ -457,8 +457,8 @@ namespace IMSys {
                 base.Columns.Add(this.columnitemName);
                 this.columnPrice = new global::System.Data.DataColumn("Price", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPrice);
-                this.columnStock = new global::System.Data.DataColumn("Stock", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnStock);
+                this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQuantity);
                 this.columnUnit = new global::System.Data.DataColumn("Unit", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUnit);
                 this.columnValue = new global::System.Data.DataColumn("Value", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -655,17 +655,17 @@ namespace IMSys {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int Stock {
+            public int Quantity {
                 get {
                     try {
-                        return ((int)(this[this.tableInventory.StockColumn]));
+                        return ((int)(this[this.tableInventory.QuantityColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Stock\' in table \'Inventory\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Quantity\' in table \'Inventory\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableInventory.StockColumn] = value;
+                    this[this.tableInventory.QuantityColumn] = value;
                 }
             }
             
@@ -727,14 +727,14 @@ namespace IMSys {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsStockNull() {
-                return this.IsNull(this.tableInventory.StockColumn);
+            public bool IsQuantityNull() {
+                return this.IsNull(this.tableInventory.QuantityColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetStockNull() {
-                this[this.tableInventory.StockColumn] = global::System.Convert.DBNull;
+            public void SetQuantityNull() {
+                this[this.tableInventory.QuantityColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -924,20 +924,20 @@ namespace IMSys.IMSysDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("liId", "liId");
             tableMapping.ColumnMappings.Add("itemName", "itemName");
             tableMapping.ColumnMappings.Add("Price", "Price");
-            tableMapping.ColumnMappings.Add("Stock", "Stock");
+            tableMapping.ColumnMappings.Add("Quantity", "Quantity");
             tableMapping.ColumnMappings.Add("Unit", "Unit");
             tableMapping.ColumnMappings.Add("Value", "Value");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Inventory] ([itemName], [Price], [Stock], [Unit], [Value]) VAL" +
-                "UES (@itemName, @Price, @Stock, @Unit, @Value)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Inventory] ([itemName], [Price], [Quantity], [Unit], [Value]) VALUES" +
+                " (@itemName, @Price, @Quantity, @Unit, @Value)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@itemName", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "itemName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Stock", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Stock", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Price", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "Price", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Quantity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Unit", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Unit", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Value", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "Value", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Value", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "Value", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -950,11 +950,23 @@ namespace IMSys.IMSysDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT liId, itemName, Price, Stock, Unit, Value FROM dbo.Inventory";
+            this._commandCollection[0].CommandText = "SELECT        liId, itemName, Price, Quantity, Unit, Value\r\nFROM            Inven" +
+                "tory";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "dbo.UpdateRow";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@price", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 2, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@quantity", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@unit", global::System.Data.SqlDbType.VarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@value", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 2, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1014,7 +1026,7 @@ namespace IMSys.IMSysDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string itemName, global::System.Nullable<decimal> Price, global::System.Nullable<int> Stock, string Unit, global::System.Nullable<decimal> Value) {
+        public virtual int Insert(string itemName, global::System.Nullable<decimal> Price, global::System.Nullable<int> Quantity, string Unit, global::System.Nullable<decimal> Value) {
             if ((itemName == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -1027,8 +1039,8 @@ namespace IMSys.IMSysDBDataSetTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((Stock.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Stock.Value));
+            if ((Quantity.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Quantity.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
@@ -1059,6 +1071,64 @@ namespace IMSys.IMSysDBDataSetTableAdapters {
                     this.Adapter.InsertCommand.Connection.Close();
                 }
             }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int UpdateRow(global::System.Nullable<int> id, string name, global::System.Nullable<decimal> price, global::System.Nullable<int> quantity, string unit, global::System.Nullable<decimal> value) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((id.HasValue == true)) {
+                command.Parameters[1].Value = ((int)(id.Value));
+            }
+            else {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((name == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(name));
+            }
+            if ((price.HasValue == true)) {
+                command.Parameters[3].Value = ((decimal)(price.Value));
+            }
+            else {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((quantity.HasValue == true)) {
+                command.Parameters[4].Value = ((int)(quantity.Value));
+            }
+            else {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((unit == null)) {
+                command.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[5].Value = ((string)(unit));
+            }
+            if ((value.HasValue == true)) {
+                command.Parameters[6].Value = ((decimal)(value.Value));
+            }
+            else {
+                command.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

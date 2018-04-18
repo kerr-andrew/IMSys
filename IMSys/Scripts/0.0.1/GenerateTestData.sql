@@ -19,7 +19,7 @@ BEGIN TRANSACTION
 	liId int NOT NULL IDENTITY(1,1),
 	itemName VARCHAR(MAX),
 	Price Decimal(10,2),
-	Stock int,
+	Quantity int,
 	Unit VARCHAR(255),
 	Value Decimal(10,2));
 
