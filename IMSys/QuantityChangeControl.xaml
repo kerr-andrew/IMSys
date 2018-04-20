@@ -6,13 +6,23 @@
              xmlns:local="clr-namespace:IMSys"
              xmlns:mp="clr-namespace:IMSys.Properties"
              mc:Ignorable="d" 
-             Height="54" Width="128">
-    <Grid>
-        <RadioButton x:Name="inputAbsBtn" Height="24" Width="24" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Image Source="pack://application:,,,/Resources/equal.png" />
-        </RadioButton>
-        <Button x:Name="inputChgBtn" Height="24" Width="24" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Image Source="pack://application:,,,/Resources/plusmin.png" />
-        </Button>
-    </Grid>
+             Height="40" Width="128" Background="Transparent">
+    <Border CornerRadius="2.5,2.5,2.5,2.5" Background="Gainsboro" BorderThickness="1,1,1,1" BorderBrush="Gray">
+        <Grid FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=inputBox}">
+            <TextBox x:Name="inputBox" Margin="6,0,0,0" Width="100" FontSize="20" IsEnabled="True" Focusable="True" TextWrapping="NoWrap" AcceptsReturn="False"  VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Quantity.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyDown="inputBox_KeyDown">
+            </TextBox>
+            <Button x:Name="inputAbsBtn" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="inputAbsBtn_Click">
+                <Grid>
+                    <Image x:Name="inputAbsImg" Source="pack://application:,,,/Resources/equal.png" />
+                    <Ellipse x:Name="absEllipse" Fill="White" Opacity=".8" Visibility="Hidden"/>
+                </Grid>
+            </Button>
+            <Button x:Name="inputChgBtn" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="inputChgBtn_Click">
+                <Grid>
+                    <Image x:Name="inputChgImg" Source="pack://application:,,,/Resources/plusmin.png" />
+                    <Ellipse x:Name="chgEllipse" Fill="White" Opacity=".5" Visibility="Hidden" />
+                </Grid>
+            </Button>
+        </Grid>
+    </Border>
 </UserControl>

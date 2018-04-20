@@ -70,6 +70,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Andrew\ExtensionMethods.cs" />
+    <Compile Include="Andrew\MainWindow.cs" />
+    <Compile Include="Andrew\Notifiable.cs" />
+    <Compile Include="IMSysDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IMSysDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -108,13 +116,24 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="IMSysDBDataSet.xsc">
+      <DependentUpon>IMSysDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="IMSysDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>IMSysDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="IMSysDBDataSet.xss">
+      <DependentUpon>IMSysDBDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\DataSources\App.datasource" />
     <None Include="Properties\DataSources\IMSys.Properties.Resources.datasource" />
     <None Include="Properties\DataSources\IMSys.Properties.Settings.datasource" />
     <None Include="Properties\DataSources\MainWindow.datasource" />
     <None Include="Properties\DataSources\QuantityChangeControl.datasource" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
