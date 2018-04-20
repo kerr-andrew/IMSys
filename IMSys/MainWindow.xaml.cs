@@ -38,14 +38,5 @@ namespace IMSys
             Inventory.ItemsSource = inventoryAdapter.GetData();
         }
 
-        private void Inventory_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            TextBox t = e.EditingElement as TextBox;  // Assumes columns are all TextBoxes
-            IMSysDBDataSet.InventoryRow inventoryRow = (e.Row.DataContext as System.Data.DataRowView).Row as IMSysDBDataSet.InventoryRow;
-            DataGridColumn dataGridColumn = e.Column;                               
-            inventoryAdapter.UpdateRow(inventoryRow.liId, t.Text, inventoryRow.Price, inventoryRow.Quantity, inventoryRow.Unit, inventoryRow.Value);
-            Debug.WriteLine(inventoryRow.liId + "\n" + t.Text + "\n" + inventoryRow.Price + "\n" + inventoryRow.Quantity + "\n" + inventoryRow.Unit + "\n" + inventoryRow.Value);
-        }
-        
     }
 }

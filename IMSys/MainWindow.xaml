@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <DataGrid Name="Inventory"   CellEditEnding="Inventory_CellEditEnding"/>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Inventory">
+                    <MenuItem x:Name="addItem" Header="Add Item" HorizontalAlignment="Left" Click="addItem_Click"/>
+                    <MenuItem x:Name="deleteItem" Header="Delete Item" VerticalAlignment="Center" Margin="0"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DataGrid Name="Inventory"   CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0"/> 
+        
     </Grid>
 </Window>
