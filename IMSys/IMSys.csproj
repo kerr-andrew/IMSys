@@ -159,7 +159,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\0.0.1\GenerateTestData.sql" />
+    <Content Include="Scripts\0.1.0\CreateAddItemsTable.sql" />
     <Content Include="Scripts\0.1.0\AddRow.sql" />
+    <Content Include="Scripts\0.1.0\GetItems.sql" />
     <Content Include="Scripts\0.1.0\UpdateRow.sql" />
   </ItemGroup>
   <ItemGroup />

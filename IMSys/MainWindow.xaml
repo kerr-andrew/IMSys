@@ -15,7 +15,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <DataGrid Name="Inventory"   CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0"/> 
+        <DataGrid x:Name="Inventory"  CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0"/> 
         
     </Grid>
 </Window>
