@@ -35,16 +35,8 @@ namespace IMSys
            
             InitializeComponent();
 
-            
-            var data = from row in inventoryAdapter.GetData().AsEnumerable()
-                       select new Item(row.itemName, row.Price, row.Quantity, row.Unit);
-            ObservableCollection<Item> items = new ObservableCollection<Item>(data);
-            Inventory.ItemsSource = inventoryAdapter.GetData();
+            FIllItemSource();
         }
-
-        public void Refresh()
-        {
-            
-        }
+        
     }
 }

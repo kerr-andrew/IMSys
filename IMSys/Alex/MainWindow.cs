@@ -56,8 +56,15 @@ namespace IMSys
 
         private void addItem_Click(object sender, RoutedEventArgs e)
         {
+            
             AddItem addItemWindow = new AddItem();
+            addItemWindow.Owner = this;
             addItemWindow.Show();
+        }
+
+        public void FIllItemSource()
+        {
+            Inventory.ItemsSource = Item.GetItems();
         }
 
     }

@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace IMSys
 {
     public class Item : INotifyPropertyChanged
     {
+        static IMSysDBDataSetTableAdapters.InventoryTableAdapter inventoryAdapter = Application.Current.Properties["inventory"] as IMSysDBDataSetTableAdapters.InventoryTableAdapter;
 
         public string Name { get; set; }
         private decimal _price;
@@ -54,6 +56,16 @@ namespace IMSys
             Unit = itemUnit;
                       
         }
+        
+        public static ObservableCollection<Item> GetItems()
+        {
+            var data = from row in inventoryAdapter.GetData().AsEnumerable()
+                       select new Item(row.itemName, row.Price, row.Quantity, row.Unit);
+            ObservableCollection<Item> items = new ObservableCollection<Item>(data);
+
+            return items;
+        }
+        
         /*
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string prop)

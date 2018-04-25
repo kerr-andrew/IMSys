@@ -61,8 +61,8 @@ namespace IMSys
                     ItemsCollection.ElementAt<Item>(count).Value
                 );
             count++;
-                inventoryAdapter.Fill((Application.Current.Windows[0] as MainWindow).Inventory.ItemsSource as IMSysDBDataSet.InventoryDataTable);
             }
+            ((MainWindow)this.Owner).FIllItemSource();
         }
 
         /*private void AddItemClick(object sender, RoutedEventArgs e)
