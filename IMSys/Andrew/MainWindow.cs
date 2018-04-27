@@ -22,6 +22,8 @@ namespace IMSys
         public MainWindow()
         {
             InitializeComponent();
+            var window = new IMSys.Andrew.Window1();
+            window.Show();
             Inventory.ItemsSource = inventoryAdapter.GetData();
             Inventory.MouseRightButtonUp += Inventory_MouseRightButtonUp;
             Inventory.PreviewMouseLeftButtonDown += Inventory_PreviewMouseLeftButtonDown;

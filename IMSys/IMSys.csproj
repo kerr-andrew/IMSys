@@ -73,6 +73,9 @@
     <Compile Include="Andrew\ExtensionMethods.cs" />
     <Compile Include="Andrew\MainWindow.cs" />
     <Compile Include="Andrew\Notifiable.cs" />
+    <Compile Include="Andrew\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IMSysDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -86,6 +89,10 @@
     <Compile Include="QuantityChangeControl.xaml.cs">
       <DependentUpon>QuantityChangeControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Andrew\Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
