@@ -3,11 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:IMSys.Andrew"
+        xmlns:local="clr-namespace:IMSys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" >
-    <Grid x:Name="MainGrid">
-        <DataGrid Name="Inventory" />
-
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Inventory">
+                    <MenuItem x:Name="addItem" Header="Add Item" HorizontalAlignment="Left" Click="addItem_Click"/>
+                    <MenuItem x:Name="deleteItem" Header="Delete Item" VerticalAlignment="Center" Margin="0"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DataGrid Name="Inventory"   CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0"/> 
+        
     </Grid>
 </Window>
