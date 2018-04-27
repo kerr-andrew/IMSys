@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using IMSys.Controls;
 
 namespace IMSys
 {
@@ -12,19 +12,10 @@ namespace IMSys
     /// </summary>
     public partial class MainWindow : Window
     {
-        QuantityChangeControl clickMenu = null;
-        static MainWindow()
+        IChangeControl clickMenu = null;
+        protected void InitializeAndrew()
         {
-            var adapter = new IMSysDBDataSetTableAdapters.InventoryTableAdapter();
-            Application.Current.Properties["inventory"] = adapter;
-        }
-        IMSysDBDataSetTableAdapters.InventoryTableAdapter inventoryAdapter = Application.Current.Properties["inventory"] as IMSysDBDataSetTableAdapters.InventoryTableAdapter;
-        public MainWindow()
-        {
-            InitializeComponent();
-            var window = new IMSys.Andrew.Window1();
-            window.Show();
-            Inventory.ItemsSource = inventoryAdapter.GetData();
+
             Inventory.MouseRightButtonUp += Inventory_MouseRightButtonUp;
             Inventory.PreviewMouseLeftButtonDown += Inventory_PreviewMouseLeftButtonDown;
         }
@@ -35,10 +26,7 @@ namespace IMSys
             if (clickMenu != null || MainGrid.Children.Contains(clickMenu))
             {
                 var dgci = GetCurrentCell();
-                if (!dgci.HasValue || 
-                    (string)dgci.Value.Column.Header == "Stock" || 
-                    dgci.Value.Item == null || 
-                    clickMenu.ItemRow.liId != dgci.Value.InventoryRow().liId)
+                if (dgci.IsActiveChangeControl(clickMenu))
                 {
                     DropClickMenuIfActive();
                     return;
@@ -91,10 +79,7 @@ namespace IMSys
         {
             var dgci = GetCurrentCell();
             
-            Console.WriteLine("MouseRightButtonUp GCC: {0}", dgci.HasValue ? dgci.Value.Column.Header : "none");
-            if (!dgci.HasValue || 
-                dgci.Value.Item == null || 
-                (clickMenu != null && clickMenu.ItemRow.liId != dgci.Value.InventoryRow().liId))
+            if (!dgci.IsActiveChangeControl(clickMenu))
             {
                 DropClickMenuIfActive();
             }
@@ -104,8 +89,11 @@ namespace IMSys
 
             switch (cell.Column.Header as string)
             {
-                case "Stock":
-                    ChangeQuantity(cell);
+                case "Quantity":
+                    GenerateChangeControl<int, IInventoryColumnEnum.Quantity>(cell);
+                    break;
+                case "Price":
+                    GenerateChangeControl<decimal, IInventoryColumnEnum.Price>(cell);
                     break;
                 default:
                     DropClickMenuIfActive();
@@ -113,12 +101,14 @@ namespace IMSys
             }
 
         }
-        private void ChangeQuantity(DataGridCellInfo cell)
+        private void GenerateChangeControl<T, IIC>(DataGridCellInfo cell)
+            where T : struct, IComparable, IFormattable, IConvertible, IComparable<T>, IEquatable<T>
+            where IIC : IInventoryColumnEnum
         {
             var row = cell.InventoryRow();
-            var qcc = new QuantityChangeControl(row);
-
-            DropClickMenuIfActive();
+            if (row == null)
+                return;
+            var qcc = new ChangeControl<T, IIC>(row);
 
             clickMenu = qcc;
             MainGrid.Children.Add(qcc);

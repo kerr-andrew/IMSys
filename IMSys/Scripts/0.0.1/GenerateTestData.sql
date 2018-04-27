@@ -16,7 +16,7 @@ BEGIN TRANSACTION
 	END
 
 	CREATE TABLE Inventory(
-	liId int NOT NULL IDENTITY(1,1),
+	liId int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	itemName VARCHAR(MAX),
 	Price Decimal(10,2),
 	Quantity int,

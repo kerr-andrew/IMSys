@@ -1,0 +1,20 @@
+﻿<UserControl  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IMSys"
+             mc:Ignorable="d" 
+             d:DesignHeight="54" d:DesignWidth="124" Background="Transparent">
+    <Border CornerRadius="2.5,2.5,2.5,2.5" Background="Gainsboro" BorderThickness="1,1,1,1" BorderBrush="Gray">
+        <Grid FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=inputBox}">
+            <TextBox x:Name="inputAbsBox" Margin="2,2,0,0" Width="100" FontSize="16" IsEnabled="True" Focusable="True" TextWrapping="NoWrap" AcceptsReturn="False"  VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding ColumnValue.Absolute, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="inputChgBox" Margin="2,0,0,2" Width="100" FontSize="16" IsEnabled="True" Focusable="True" TextWrapping="NoWrap" AcceptsReturn="False" VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="{Binding ColumnValue.Absolute, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+            <Button x:Name="inputAbsBtn" Margin="0,4,0,0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" IsEnabled="False">
+                    <Image x:Name="inputAbsImg" Source="pack://application:,,,/Resources/equal.png" />
+            </Button>
+            <Button x:Name="inputChgBtn" Margin="0,0,0,4" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Transparent" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" IsEnabled="False">
+                    <Image x:Name="inputChgImg" Source="pack://application:,,,/Resources/plusmin.png" />
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

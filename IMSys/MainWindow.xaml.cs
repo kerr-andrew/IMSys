@@ -22,6 +22,7 @@ namespace IMSys
 
     public partial class MainWindow : Window
     {
+        public event Action Initializing;
         static MainWindow()
         {
             Application.Current.Properties["inventory"] = new IMSysDBDataSetTableAdapters.InventoryTableAdapter();
@@ -32,11 +33,17 @@ namespace IMSys
         public MainWindow()
         {
            
-            InitializeComponent();
+            Initializing += InitializeComponent;
+            Initializing += InitializeAndrew;
+            Initializing += FillTable;
 
-            
-            Inventory.ItemsSource = inventoryAdapter.GetData();
+            Initializing();
+
         }
 
+        public void FillTable()
+        {
+            Inventory.ItemsSource = inventoryAdapter.GetData();
+        }
     }
 }

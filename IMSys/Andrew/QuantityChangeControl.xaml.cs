@@ -21,7 +21,7 @@ namespace IMSys
         {
             InitializeComponent();
             ItemRow = row;
-            Quantity.Value = ItemRow.Stock;
+            Quantity.Value = ItemRow.Quantity;
 
             inputBox.SetBinding(TextBox.TextProperty, new Binding()
             {
@@ -65,7 +65,7 @@ namespace IMSys
             if (changeType)
             {
                 //true == Absolute
-                Quantity.Value = ItemRow.Stock + Quantity.Value;
+                Quantity.Value = ItemRow.Quantity + Quantity.Value;
                 absEllipse.Visibility = Visibility.Hidden;
                 inputAbsBtn.IsEnabled = false;
                 chgEllipse.Visibility = Visibility.Visible;
@@ -75,7 +75,7 @@ namespace IMSys
             else
             {
                 //false == plus minus
-                Quantity.Value = Quantity.Value - ItemRow.Stock;
+                Quantity.Value = Quantity.Value - ItemRow.Quantity;
                 absEllipse.Visibility = Visibility.Visible;
                 inputAbsBtn.IsEnabled = true;
                 chgEllipse.Visibility = Visibility.Hidden;
@@ -100,13 +100,13 @@ namespace IMSys
         {
             if (e.Key == Key.Enter)
             {
-                var value = ItemRow.Stock;
+                var value = ItemRow.Quantity;
                 if (changeType)
                     value = int.Parse(inputBox.Text);
                 else
                     value += int.Parse(inputBox.Text);
 
-                ItemRow.Stock = value;
+                ItemRow.Quantity = value;
 
                 var parent = Application.Current.Windows[0] as MainWindow;
                 var builder = new System.Data.SqlClient.SqlCommandBuilder(inventory.Adapter);

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IMSys"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <Grid Name="MainGrid">
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Inventory">
@@ -15,7 +15,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <DataGrid Name="Inventory"   CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0"/> 
+        <DataGrid Name="Inventory" CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0"/> 
         
     </Grid>
 </Window>
