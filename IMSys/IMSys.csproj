@@ -75,6 +75,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DeleteItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,6 +90,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DeleteItem.xaml.cs">
+      <DependentUpon>DeleteItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="IMSysDBDataSet.cs">
       <DependentUpon>IMSysDBDataSet.xsd</DependentUpon>
@@ -130,6 +137,7 @@
     <None Include="IMSysDBDataSet.xss">
       <DependentUpon>IMSysDBDataSet.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -159,8 +167,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\0.0.1\GenerateTestData.sql" />
-    <Content Include="Scripts\0.1.0\CreateAddItemsTable.sql" />
     <Content Include="Scripts\0.1.0\AddRow.sql" />
+    <Content Include="Scripts\0.1.0\DeleteItems.sql" />
     <Content Include="Scripts\0.1.0\GetItems.sql" />
     <Content Include="Scripts\0.1.0\UpdateRow.sql" />
   </ItemGroup>

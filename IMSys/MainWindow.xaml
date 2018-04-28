@@ -10,8 +10,8 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Inventory">
-                    <MenuItem x:Name="addItem" Header="Add Item" HorizontalAlignment="Left" Click="addItem_Click"/>
-                    <MenuItem x:Name="deleteItem" Header="Delete Item" VerticalAlignment="Center" Margin="0"/>
+                    <MenuItem x:Name="addItem" Header="Add Item" HorizontalAlignment="Left" Click="AddItemClick"/>
+                    <MenuItem x:Name="deleteItem" Header="Delete Item" VerticalAlignment="Center" Margin="0" Click="DeleteItemClick"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

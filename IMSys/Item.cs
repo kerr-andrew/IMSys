@@ -42,10 +42,9 @@ namespace IMSys
 
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string prop)
+        public Item(string itemName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            Name = itemName;
         }
 
         public Item(string itemName, decimal itemPrice, int itemQuantity, string itemUnit)
@@ -54,8 +53,16 @@ namespace IMSys
             Price = itemPrice;
             Quantity = itemQuantity;
             Unit = itemUnit;
-                      
+
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string prop)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        
         
         public static ObservableCollection<Item> GetItems()
         {
@@ -64,6 +71,17 @@ namespace IMSys
             ObservableCollection<Item> items = new ObservableCollection<Item>(data);
 
             return items;
+        }
+
+        public static ObservableCollection<Item> GetItemNames()
+        {
+            var data = from row in inventoryAdapter.GetData().AsEnumerable()
+                       select new Item(row.itemName);
+                      
+            ObservableCollection<Item> items = new ObservableCollection<Item>(data);
+                          
+            return items;
+
         }
         
         /*

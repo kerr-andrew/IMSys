@@ -54,12 +54,19 @@ namespace IMSys
 
         }
 
-        private void addItem_Click(object sender, RoutedEventArgs e)
+        private void AddItemClick(object sender, RoutedEventArgs e)
         {
             
             AddItem addItemWindow = new AddItem();
             addItemWindow.Owner = this;
             addItemWindow.Show();
+        }
+
+        private void DeleteItemClick(object sender, RoutedEventArgs e)
+        {
+            DeleteItem deleteItemWindow = new DeleteItem();
+            deleteItemWindow.Owner = this;
+            deleteItemWindow.Show();
         }
 
         public void FIllItemSource()
