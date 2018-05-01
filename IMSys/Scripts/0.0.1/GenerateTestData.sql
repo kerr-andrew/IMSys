@@ -16,22 +16,24 @@ BEGIN TRANSACTION
 	END
 
 	CREATE TABLE Inventory(
-	liId int NOT NULL IDENTITY(1,1),
+	liId int NOT NULL IDENTITY(1,1),	
 	itemName VARCHAR(MAX),
 	Price Decimal(10,2),
 	Quantity int,
 	Unit VARCHAR(255),
-	Value Decimal(10,2));
+	Value Decimal(10,2),
+	CategoryId int,
+	PRIMARY KEY (liId),
+	FOREIGN KEY (CategoryId) REFERENCES Categories(liId)
+	);
 
-	INSERT INTO Inventory VALUES('Copper Wire','0.09','20','ft','1.80'),
-								('Plug','2.99','39','unit','116.61'),
-								('Outlet','3.99','500','outlets','300.00'),
-								('maretts','0.01','2000','maretts','20.00'),
-								('screws','50.00','20000','screws','2000000.00');
+	INSERT INTO Inventory VALUES('Copper Wire','0.09','20','ft','1.80',1),
+								('Plug','2.99','39','unit','116.61',1),
+								('Outlet','3.99','500','outlets','300.00',1,
+								('maretts','0.01','2000','maretts','20.00',1),
+								('screws','50.00','20000','screws','2000000.00',1);
 
 COMMIT TRANSACTION
 
 	IF @@ERROR <> 0 
 	ROLLBACK TRANSACTION
-
-	

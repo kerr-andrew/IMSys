@@ -12,11 +12,16 @@ namespace IMSys
     public class Item : INotifyPropertyChanged
     {
         static IMSysDBDataSetTableAdapters.InventoryTableAdapter inventoryAdapter = Application.Current.Properties["inventory"] as IMSysDBDataSetTableAdapters.InventoryTableAdapter;
+        static IMSysDBDataSetTableAdapters.CategoriesTableAdapter categoryAdapter = Application.Current.Properties["Categories"] as IMSysDBDataSetTableAdapters.CategoriesTableAdapter;
 
-        public string Name { get; set; }
+        public int liId;
+        private string _name;
+        public string Name { get { return _name; }
+            set { _name = value; } }
         private decimal _price;
-        public decimal Price { get { return _price; } set { if (_price != value) { _price = value; OnPropertyChanged("Value"); } } }
-
+        public decimal Price {
+            get { return _price; }
+            set { if (_price != value) { _price = value; OnPropertyChanged("Value"); } } }        
         private int _quantity;
         public int Quantity
         {
@@ -36,7 +41,19 @@ namespace IMSys
         }
         public string Unit { get; set; }
         public decimal Value { get { return Price * Quantity; } }
-
+        private int _category;
+        public int Category
+        {
+            get { return _category; }
+            set
+            {
+                if (value != _category)
+                {
+                    _category = value;
+                    OnPropertyChanged("Category");
+                }
+            }
+        }
         public Item()
         {
 
@@ -47,12 +64,14 @@ namespace IMSys
             Name = itemName;
         }
 
-        public Item(string itemName, decimal itemPrice, int itemQuantity, string itemUnit)
+        public Item(int id, string itemName, decimal itemPrice, int itemQuantity, string itemUnit, int categoryId)
         {
+            liId = id;
             Name = itemName;
             Price = itemPrice;
             Quantity = itemQuantity;
             Unit = itemUnit;
+            Category = categoryId;
 
         }
 
@@ -62,17 +81,23 @@ namespace IMSys
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
-        
-        
+        private string getCategory(int categoryId)
+        {       
+
+            IMSys.Category category = IMSys.Category.GetCategoryName(categoryId);
+            return category.Name;           
+            
+        }
+
         public static ObservableCollection<Item> GetItems()
         {
             var data = from row in inventoryAdapter.GetData().AsEnumerable()
-                       select new Item(row.itemName, row.Price, row.Quantity, row.Unit);
+                       select new Item(row.liId, row.itemName, row.Price, row.Quantity, row.Unit, row.CategoryId);
             ObservableCollection<Item> items = new ObservableCollection<Item>(data);
-
+            
             return items;
         }
-
+        
         public static ObservableCollection<Item> GetItemNames()
         {
             var data = from row in inventoryAdapter.GetData().AsEnumerable()
@@ -142,6 +167,16 @@ namespace IMSys
             }
         }*/
 
-
+    }
+    public class InventoryViewModel
+    {
+        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<Category> Categories { get; set; }
+        public InventoryViewModel()
+        {
+            Items = Item.GetItems();
+            Categories = Category.GetCategories();
+        }
+        public Category SelectedItem { get; set; }
     }
 }

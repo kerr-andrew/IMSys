@@ -54,11 +54,11 @@ namespace IMSys
             int count = 0;
             foreach (Item item in ItemsCollection) {
                 inventoryAdapter.AddRow(
-                    ItemsCollection.ElementAt<Item>(count).Name.ToString(),
-                    ItemsCollection.ElementAt<Item>(count).Price,
-                    ItemsCollection.ElementAt<Item>(count).Quantity,
-                    ItemsCollection.ElementAt<Item>(count).Unit.ToString(),
-                    ItemsCollection.ElementAt<Item>(count).Value
+                    ItemsCollection.ElementAt(count).Name.ToString(),
+                    ItemsCollection.ElementAt(count).Price,
+                    ItemsCollection.ElementAt(count).Quantity,
+                    ItemsCollection.ElementAt(count).Unit.ToString(),
+                    ItemsCollection.ElementAt(count).Value
                 );
             count++;
             }

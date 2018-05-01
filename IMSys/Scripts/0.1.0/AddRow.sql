@@ -16,11 +16,10 @@ CREATE PROCEDURE [dbo].[AddRow]
 	BEGIN TRANSACTION
 
 	INSERT INTO Inventory 
-	VALUES (@name, @price, @quantity, @unit, @value)
+	VALUES (@name, Null, @price, @quantity, @unit, @value)
 	
 
 	COMMIT TRANSACTION
 
 	IF @@ERROR <> 0 
 	ROLLBACK TRANSACTION
-

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,15 +24,14 @@ namespace IMSys
     {
 
         IMSysDBDataSetTableAdapters.InventoryTableAdapter inventoryAdapter = Application.Current.Properties["inventory"] as IMSysDBDataSetTableAdapters.InventoryTableAdapter;
-        ObservableCollection<Item> itemNames = Item.GetItemNames();
-        ArrayList removableItems = new ArrayList();
 
 
         public DeleteItem()
         {
             InitializeComponent();
             lbxItems.ItemsSource = Item.GetItemNames();
-
+            ICollectionView view = CollectionViewSource.GetDefaultView(lbxItems.ItemsSource);
+            view.Filter = SearchFilter;
         }
 
         
@@ -59,7 +59,7 @@ namespace IMSys
             }
             else
             {
-                lblwarning.Content = "You haven't selected an item in the delted items list to remove!";
+                lblwarning.Content = "You haven't selected an item in the deleted items list to remove!";
                 lblwarning.Visibility = Visibility.Visible;
             }
         }
@@ -72,46 +72,17 @@ namespace IMSys
             }
         }
 
-        private void TxtSearchItems(object sender, TextChangedEventArgs e)
+        private bool SearchFilter(object item)
         {
-           /*ArrayList itemsToRemove = new ArrayList();
-            string searchString = txtSearch.Text;
-            int count = 0;
-            foreach (Item itemName in itemNames)
-            {
-                removableItems.Add(itemName.Name);
-            }
-            
-            foreach(string str in removableItems)
-            {
-                string str1 = removableItems[count].ToString();
+            if (String.IsNullOrEmpty(txtSearch.Text))
+                return true;
+            else
+                return ((item as Item).Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
 
-                if (str1.Contains(searchString))
-                {
-                    itemsToRemove.Add(str1);
-                }
-                count++;
-            }
-
-            foreach (string str in itemsToRemove)
-            {
-                lbxItems.Items.Remove(str);
-            }
-
-
-
-
-
-            if(removableItems.Contains(searchString) == true) 
-            {
-                removableItems
-                int i = removableItems.IndexOf(searchString);
-                itemsToRemove.Add(removableItems[i]);
-                removableItems.Remove;
-            } 
-            */
-
-
+        private void TxtSearchItems(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lbxItems.ItemsSource).Refresh();
         }
     }
 }

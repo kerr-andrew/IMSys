@@ -86,11 +86,13 @@
     <Compile Include="AddItem.xaml.cs">
       <DependentUpon>AddItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Alex\Extensions.cs" />
     <Compile Include="Alex\MainWindow.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Category.cs" />
     <Compile Include="DeleteItem.xaml.cs">
       <DependentUpon>DeleteItem.xaml</DependentUpon>
     </Compile>
@@ -169,6 +171,7 @@
     <Content Include="Scripts\0.0.1\GenerateTestData.sql" />
     <Content Include="Scripts\0.1.0\AddRow.sql" />
     <Content Include="Scripts\0.1.0\DeleteItems.sql" />
+    <Content Include="Scripts\0.1.0\GetCategory.sql" />
     <Content Include="Scripts\0.1.0\GetItems.sql" />
     <Content Include="Scripts\0.1.0\UpdateRow.sql" />
   </ItemGroup>
