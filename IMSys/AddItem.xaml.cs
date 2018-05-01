@@ -42,7 +42,7 @@ namespace IMSys
                 value = price * quantity;
             }
             if(value != null)
-                inventoryAdapter.AddRow(name, price, quantity, unit, value.Value);
+                inventoryAdapter.AddRow(name, price, quantity, unit, 1);
         }
     }
 }

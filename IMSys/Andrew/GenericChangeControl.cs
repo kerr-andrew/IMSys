@@ -215,9 +215,7 @@ namespace IMSys.Controls
 
             ItemRow[ColumnName] = value;
 
-            var builder = new System.Data.SqlClient.SqlCommandBuilder(inventory.Adapter);
-            inventory.Adapter.UpdateCommand = builder.GetUpdateCommand();
-            inventory.Update(ItemRow);
+            inventory.UpdateRow(ItemRow.liId, ItemRow.itemName, ItemRow.Price, ItemRow.Quantity, ItemRow.Unit, ItemRow.CategoryId);
         }
     }
 }

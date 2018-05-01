@@ -22,31 +22,31 @@ namespace IMSys
 
         private void Inventory_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            TextBox t = e.EditingElement as TextBox;  // Assumes columns are all TextBoxes
-            IMSysDBDataSet.InventoryRow inventoryRow = (e.Row.DataContext as System.Data.DataRowView).Row as IMSysDBDataSet.InventoryRow;
+            System.Windows.Controls.TextBox t = e.EditingElement as System.Windows.Controls.TextBox;  // Assumes columns are all TextBoxes
+            Item item = e.Row.DataContext as IMSys.Item;
             DataGridColumn dataGridColumn = e.Column;
-            var a = e.Column.Header.ToString();
+            string a = "";
+            if (e.Column is DataGridComboBoxColumn)
+                a = "Category";
+            else
+                a = e.Column.Header.ToString();
             Debug.WriteLine(a);
-            switch (a) {
-                case "itemItem":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, t.Text,
-                    inventoryRow.Price, inventoryRow.Quantity, inventoryRow.Unit, inventoryRow.Value);
+            switch (a)
+                case "Name":
+                    item.Name = t.Text;
                     break;
                 case "Price":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.itemName, Decimal.Parse(t.Text),
-                    inventoryRow.Quantity, inventoryRow.Unit, inventoryRow.Value);
+                    decimal tempd;
+                    if (Decimal.TryParse(t.Text, out tempd))
+                        item.Price = tempd;
                     break;
                 case "Quantity":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.itemName, inventoryRow.Price,
-                    Int32.Parse(t.Text), inventoryRow.Unit, inventoryRow.Value);
+                    int tempi;
+                    if (int.TryParse(t.Text, out tempi))
+                        item.Quantity = tempi;
                     break;
                 case "Unit":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.itemName, inventoryRow.Price,
-                    inventoryRow.Quantity, t.Text, inventoryRow.Value);
-                    break;
-                case "Value":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.itemName, inventoryRow.Price,
-                    inventoryRow.Quantity, inventoryRow.Unit, Decimal.Parse(t.Text));
+                    item.Unit = t.Text;
                     break;
                 default:
                     break;
