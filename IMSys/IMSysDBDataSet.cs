@@ -4,8 +4,5 @@
 
     partial class IMSysDBDataSet
     {
-        partial class InventoryDataTable
-        {
-        }
     }
 }

@@ -58,7 +58,7 @@ namespace IMSys
                     ItemsCollection.ElementAt(count).Price,
                     ItemsCollection.ElementAt(count).Quantity,
                     ItemsCollection.ElementAt(count).Unit.ToString(),
-                    ItemsCollection.ElementAt(count).Value
+                    ItemsCollection.ElementAt(count).Category
                 );
             count++;
             }

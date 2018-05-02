@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 
 namespace IMSys
 {
@@ -54,9 +56,10 @@ namespace IMSys
 
         public static Category GetCategoryName(int categoryId)
         {
-            var data = categoryAdapter.GetCategory(categoryId);
+            string data = "";
+            categoryAdapter.GetCategory(categoryId, ref data);
 
-            Category name = new Category(categoryId, data as string);
+            Category name = new Category(categoryId, data);
 
 
             return name;
@@ -64,10 +67,33 @@ namespace IMSys
 
         public static ObservableCollection<Category> GetCategories()
         {
-            var data = from row in categoryAdapter.GetData().AsEnumerable()
-                       select new Category(row.liId, row.CategoryName);
+            var rows = categoryAdapter.GetData();
+            var data = from row in rows.AsEnumerable()
+                       select new Category(row.liId, row.Name);
             ObservableCollection<Category> categories = new ObservableCollection<Category>(data);
             return categories;
+        }
+        public static implicit operator int(Category cat)
+        {
+            return cat.Id;
+        }
+        public static explicit operator Category(int i)
+        {
+            return GetCategoryName(i);
+        }
+
+
+    }
+    public class CategoryConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Category.GetCategoryName((int)value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (value as Category).Id;
         }
     }
 }

@@ -91,7 +91,8 @@ namespace IMSys
 
         public static ObservableCollection<Item> GetItems()
         {
-            var data = from row in inventoryAdapter.GetData().AsEnumerable()
+            var id = inventoryAdapter.GetData();
+            var data = from row in id.AsEnumerable()
                        select new Item(row.liId, row.itemName, row.Price, row.Quantity, row.Unit, row.CategoryId);
             ObservableCollection<Item> items = new ObservableCollection<Item>(data);
             

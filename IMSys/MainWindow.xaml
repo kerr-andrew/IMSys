@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:IMSys"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-
+    <Window.Resources>
+        <local:CategoryConverter x:Key="CategoryConverterKey" />
+    </Window.Resources>
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -25,9 +27,8 @@
                 <DataGridTextColumn Binding="{Binding Value}" />
                 <DataGridComboBoxColumn SelectedValueBinding="{Binding Category}"
                                         DisplayMemberPath="Name"
-                                        TextBinding="{Binding Name}"
                                         SelectedValuePath="Id"
-                                        SelectedItemBinding="{Binding Path=DataContext.SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}">
+                                        SelectedItemBinding="{Binding Path=Category, Converter={StaticResource CategoryConverterKey}}">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="{x:Type ComboBox}">
                             <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Categories, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
