@@ -9,14 +9,14 @@ CREATE PROCEDURE [dbo].[AddRow]
 	@price decimal(10,2),
 	@quantity int,
 	@unit varchar(max),
-	@value decimal(10,2)
+	@categoryid int = 1
 
 	AS
 	
 	BEGIN TRANSACTION
 
 	INSERT INTO Inventory 
-	VALUES (@name, Null, @price, @quantity, @unit, @value)
+	VALUES (@name, @price, @quantity, @unit, @categoryid)
 	
 
 	COMMIT TRANSACTION

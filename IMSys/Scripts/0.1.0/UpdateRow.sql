@@ -2,6 +2,7 @@
 DROP PROCEDURE [dbo].UpdateRow
 
 GO
+
 CREATE PROCEDURE [dbo].[UpdateRow]
 	
 	
@@ -10,7 +11,6 @@ CREATE PROCEDURE [dbo].[UpdateRow]
 	@price decimal(10,2),
 	@quantity int,
 	@unit varchar(max),
-	@value decimal(10,2),
 	@categoryId int
 
 	AS
@@ -18,7 +18,7 @@ CREATE PROCEDURE [dbo].[UpdateRow]
 	BEGIN TRANSACTION
 
 	UPDATE Inventory 
-	SET itemName = @name, Price = @price, Quantity = @quantity, Unit = @unit, Value = @value, CategoryId = @categoryId
+	SET itemName = @name, Price = @price, Quantity = @quantity, Unit = @unit, CategoryId = @categoryId
 	WHERE liId = @id;
 	
 	COMMIT TRANSACTION
