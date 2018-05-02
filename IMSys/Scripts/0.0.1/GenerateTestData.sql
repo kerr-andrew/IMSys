@@ -50,7 +50,7 @@ BEGIN TRANSACTION
 	Unit VARCHAR(255),
 	CategoryId int NOT NULL DEFAULT 1,
 	CONSTRAINT PK_InventoryID PRIMARY KEY (liId),
-	CONSTRAINT FK_Inv_Cat FOREIGN KEY (CategoryId) REFERENCES Categories(liId)
+	CONSTRAINT FK_Inv_Cat FOREIGN KEY (CategoryId) REFERENCES Categories(liId) on delete set default
 	);
 
 	INSERT INTO Inventory (itemName, Price, Quantity, Unit, CategoryId)
