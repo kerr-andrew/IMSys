@@ -76,6 +76,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DeleteItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,6 +87,7 @@
     <Compile Include="AddItem.xaml.cs">
       <DependentUpon>AddItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Alex\Extensions.cs" />
     <Compile Include="Alex\MainWindow.cs" />
     <Compile Include="Andrew\ExtensionMethods.cs" />
     <Compile Include="Andrew\GenericChangeControl.cs" />
@@ -91,6 +96,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Category.cs" />
+    <Compile Include="DeleteItem.xaml.cs">
+      <DependentUpon>DeleteItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="IMSysDBDataSet.cs">
       <DependentUpon>IMSysDBDataSet.xsd</DependentUpon>
@@ -135,6 +144,7 @@
     <None Include="IMSysDBDataSet.xss">
       <DependentUpon>IMSysDBDataSet.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -169,6 +179,9 @@
     </Content>
     <Content Include="Scripts\0.0.1\GenerateTestData.sql" />
     <Content Include="Scripts\0.1.0\AddRow.sql" />
+    <Content Include="Scripts\0.1.0\DeleteItems.sql" />
+    <Content Include="Scripts\0.1.0\GetCategory.sql" />
+    <Content Include="Scripts\0.1.0\GetItems.sql" />
     <Content Include="Scripts\0.1.0\UpdateRow.sql" />
   </ItemGroup>
   <ItemGroup />

@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -22,42 +23,62 @@ namespace IMSys
 
         private void Inventory_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            TextBox t = e.EditingElement as TextBox;  // Assumes columns are all TextBoxes
-            IMSysDBDataSet.InventoryRow inventoryRow = (e.Row.DataContext as System.Data.DataRowView).Row as IMSysDBDataSet.InventoryRow;
+            System.Windows.Controls.TextBox t = e.EditingElement as System.Windows.Controls.TextBox;  // Assumes columns are all TextBoxes
+            Item item = e.Row.DataContext as IMSys.Item;
+            //IMSysDBDataSet.InventoryRow inventoryRow = (e.Row.DataContext as System.Data.DataRowView).Row as IMSysDBDataSet.InventoryRow;
             DataGridColumn dataGridColumn = e.Column;
-            var a = e.Column.Header.ToString();
+            string a = "";
+            if (e.Column is DataGridComboBoxColumn)
+                a = "Category";
+            else
+                a = e.Column.Header.ToString();
             Debug.WriteLine(a);
-            switch (a) {
-                case "itemItem":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, t.Text,
-                    inventoryRow.Price, inventoryRow.Quantity, inventoryRow.Unit, inventoryRow.Value);
+            switch (a)
+            {
+                case "Name":
+                    item.Name = t.Text;
                     break;
                 case "Price":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.itemName, Decimal.Parse(t.Text),
-                    inventoryRow.Quantity, inventoryRow.Unit, inventoryRow.Value);
+                    decimal tempd;
+                    if (Decimal.TryParse(t.Text, out tempd))
+                        item.Price = tempd;
                     break;
                 case "Quantity":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.itemName, inventoryRow.Price,
-                    Int32.Parse(t.Text), inventoryRow.Unit, inventoryRow.Value);
+                    int tempi;
+                    if (int.TryParse(t.Text, out tempi))
+                        item.Quantity = tempi;
                     break;
                 case "Unit":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.itemName, inventoryRow.Price,
-                    inventoryRow.Quantity, t.Text, inventoryRow.Value);
+                    item.Unit = t.Text;
                     break;
-                case "Value":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.itemName, inventoryRow.Price,
-                    inventoryRow.Quantity, inventoryRow.Unit, Decimal.Parse(t.Text));
+                case "Category":
+                    item.Category = (int)(e.EditingElement as System.Windows.Controls.ComboBox).SelectedValue;
                     break;
                 default:
                     break;
             }
-
+            inventoryAdapter.UpdateRow(item.liId, item.Name, item.Price, item.Quantity, item.Unit, item.Category);
         }
 
-        private void addItem_Click(object sender, RoutedEventArgs e)
+        private void AddItemClick(object sender, RoutedEventArgs e)
         {
+            
             AddItem addItemWindow = new AddItem();
+            addItemWindow.Owner = this;
             addItemWindow.Show();
+        }
+
+        private void DeleteItemClick(object sender, RoutedEventArgs e)
+        {
+            DeleteItem deleteItemWindow = new DeleteItem();
+            deleteItemWindow.Owner = this;
+            deleteItemWindow.Show();
+        }
+
+        public void FIllItemSource()
+        {
+            Inventory.ItemsSource = Item.GetItems();
+            Inventory.FastEdit();
         }
 
     }

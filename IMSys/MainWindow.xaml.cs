@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -22,28 +23,47 @@ namespace IMSys
 
     public partial class MainWindow : Window
     {
-        public event Action Initializing;
         static MainWindow()
         {
             Application.Current.Properties["inventory"] = new IMSysDBDataSetTableAdapters.InventoryTableAdapter();
+            Application.Current.Properties["Categories"] = new IMSysDBDataSetTableAdapters.CategoriesTableAdapter();
         }
 
         IMSysDBDataSetTableAdapters.InventoryTableAdapter inventoryAdapter = Application.Current.Properties["inventory"] as IMSysDBDataSetTableAdapters.InventoryTableAdapter;
 
+        public ObservableCollection<Category> Categories { get; } = Category.GetCategories();
+        public DataGridComboBoxColumn col = null;
         public MainWindow()
         {
            
-            Initializing += InitializeComponent;
-            Initializing += InitializeAndrew;
-            Initializing += FillTable;
+            InitializeComponent();
 
-            Initializing();
+            Inventory.Loaded += Inventory_Loaded;
+            FIllItemSource();
 
         }
 
-        public void FillTable()
+        private void Inventory_Loaded(object sender, RoutedEventArgs e)
         {
-            Inventory.ItemsSource = inventoryAdapter.GetData();
+           /* col = new DataGridComboBoxColumn
+            {
+                Header = "Category",
+                ItemsSource = Category.GetCategories(),
+                
+               
+            };
+            col.DisplayMemberPath = "Name";
+            col.TextBinding = new Binding("Name") { Mode = BindingMode.TwoWay };
+            
+            Inventory.Columns[Inventory.Columns.Count - 1] = col;
+            Inventory.FastEdit();*/
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = Inventory.CurrentItem as Item;
+            var box = sender as ComboBox;
+            var cat = box.SelectedItem as Category;
         }
     }
 }

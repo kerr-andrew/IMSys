@@ -1,0 +1,21 @@
+﻿<Window x:Class="IMSys.DeleteItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IMSys"
+        mc:Ignorable="d"
+        Title="DeleteItem" Height="450" Width="600">
+    <Grid>
+        <ListBox x:Name="lbxItems" HorizontalAlignment="Left" Height="176" Margin="100,124,0,0" VerticalAlignment="Top" Width="100" DisplayMemberPath="Name"/>
+        <ListBox x:Name="lbxDeletedItems" HorizontalAlignment="Left" Height="176" Margin="400,124,0,0" VerticalAlignment="Top" Width="100" DisplayMemberPath="Name"/>
+        <Button x:Name="btnAddItem" Content=">>" HorizontalAlignment="Left" Margin="285,165,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-0.053,0" Click="AddItemToDeleteList"/>
+        <Button x:Name="btnRemoveItem" Content="&lt;&lt;" HorizontalAlignment="Left" Margin="285,227,0,0" VerticalAlignment="Top" Width="30" Height="20" Click="RemoveItemFromDeleteList"/>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="23" Margin="100,92,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" TextChanged="TxtSearchItems" />
+        <Label x:Name="lblwarning" Content="" HorizontalAlignment="Left" Margin="175,339,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.079,0" Foreground="Red" Visibility="Hidden"/>
+        <Label x:Name="lblItemsHeader" Content="Items" HorizontalAlignment="Left" Margin="129,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,0.462"/>
+        <Label x:Name="lblDeletedItemsHeader" Content="Deleted Items" HorizontalAlignment="Left" Margin="409,43,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnDeleteItems" Content="Delete Items" HorizontalAlignment="Left" Margin="260,366,0,0" VerticalAlignment="Top" Width="75" Click="DeleteItems"/>
+
+    </Grid>
+</Window>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +23,49 @@ namespace IMSys
     {
 
         IMSysDBDataSetTableAdapters.InventoryTableAdapter inventoryAdapter = Application.Current.Properties["inventory"] as IMSysDBDataSetTableAdapters.InventoryTableAdapter;
+        public ObservableCollection<Item> ItemsCollection { get; set; } = new ObservableCollection<Item>()
+        ;
 
         public AddItem()
         {
             InitializeComponent();
+            addItemGrid.SetBinding(DataGrid.ItemsSourceProperty, new Binding()
+            {
+                Source = this,
+                Path = new PropertyPath("ItemsCollection"),
+                Mode = BindingMode.TwoWay
+            });
+
+
         }
 
-        private void AddItemClick(object sender, RoutedEventArgs e)
+        private void Grid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.Column.Header.ToString() == "Value")
+            {
+                // e.Cancel = true;   // For not to include 
+                e.Column.IsReadOnly = true; // Makes the column as read only
+            }
+
+        }
+
+        private void addItems(object sender, RoutedEventArgs e)
+        {
+            int count = 0;
+            foreach (Item item in ItemsCollection) {
+                inventoryAdapter.AddRow(
+                    ItemsCollection.ElementAt(count).Name.ToString(),
+                    ItemsCollection.ElementAt(count).Price,
+                    ItemsCollection.ElementAt(count).Quantity,
+                    ItemsCollection.ElementAt(count).Unit.ToString(),
+                    ItemsCollection.ElementAt(count).Category
+                );
+            count++;
+            }
+            ((MainWindow)this.Owner).FIllItemSource();
+        }
+
+        /*private void AddItemClick(object sender, RoutedEventArgs e)
         {
             
             string name = txtItemName.Text;
@@ -43,6 +81,6 @@ namespace IMSys
             }
             if(value != null)
                 inventoryAdapter.AddRow(name, price, quantity, unit, value.Value);
-        }
+        }*/
     }
 }

@@ -6,9 +6,23 @@
         xmlns:local="clr-namespace:IMSys"
         mc:Ignorable="d"
         Title="AddItem" Height="450" Width="800">
+
     <Grid>
+
+        <DataGrid Name="addItemGrid" AutoGeneratingColumn="Grid_AutoGeneratingColumn"/>
+
+        <Button x:Name="btnAddItems" Content="Add Items" Margin="0,380,0,0" Width="70" Height="20" Click="addItems"/>
+
         
-        <Label x:Name="lblItemName" Content="Item Name" Height="30" Width="70" Margin="0,0,100,300"/>
+        <!-- 
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Name"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Price"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Quantity"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Unit"/>
+                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Value"/>
+            </DataGrid.Columns>
+    <Label x:Name="lblItemName" Content="Item Name" Height="30" Width="70" Margin="0,0,100,300"/>
         <TextBox x:Name="txtItemName" Height="20" Width="70" Margin="100,0,0,305"/>
 
         <Label x:Name="lblPrice" Content="Price" Height="30" Width="70" Margin="0,0,100,200"/>
@@ -23,5 +37,7 @@
         <Label x:Name="lblValue" Content="Value" Height="30" Width="70" Margin="0,100,0,0"/>
         
         <Button x:Name="btnAddItem" Content="Add Item" Height="30" Width="100" Margin="0,300,0,0" Click="AddItemClick"/>
+        
+        -->
     </Grid>
 </Window>
