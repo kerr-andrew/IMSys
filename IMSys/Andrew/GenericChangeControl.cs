@@ -15,7 +15,7 @@ namespace IMSys.Controls
     /// </summary>
     public abstract class IChangeControl : UserControl
     {
-        public abstract IMSysDBDataSet.InventoryRow ItemRow { get; set; }
+        public abstract Item Item { get; set; }
         public abstract string Column { get; }
     }
     public class ChangeControl<T, CE> : IChangeControl
@@ -24,7 +24,7 @@ namespace IMSys.Controls
     {
         public DualValue<T> ColumnValue { get; set; }
 
-        public override IMSysDBDataSet.InventoryRow ItemRow { get; set; }
+        public override Item Item { get; set; }
 
         IMSysDBDataSetTableAdapters.InventoryTableAdapter inventory = Application.Current.Properties["inventory"] as IMSysDBDataSetTableAdapters.InventoryTableAdapter;
 
@@ -162,13 +162,13 @@ namespace IMSys.Controls
         }
 
 
-        public ChangeControl(IMSysDBDataSet.InventoryRow row)
+        public ChangeControl(Item row)
         {
-            ItemRow = row;
+            Item = row;
 
             //can't pass enum or string as type parameter, could use string as instantiation parameter but meh, we'll sell can be easily changed
             //I just like the look up ChangeControl<decimal, IInventoryColumnEnum.Quantity>
-            ColumnValue = new DualValue<T>((dynamic)ItemRow[ColumnName]);
+            ColumnValue = new DualValue<T>((dynamic)Item[ColumnName]);
 
             InitializeComponent();
 
@@ -197,7 +197,7 @@ namespace IMSys.Controls
         {
             if (e.Key == Key.Enter)
             {
-                var value = ItemRow[ColumnName];
+                var value = Item[ColumnName];
 
 
                 UpdateValue(ColumnValue.Absolute);
@@ -210,14 +210,13 @@ namespace IMSys.Controls
 
         private void UpdateValue(T value)
         {
-            if (Equals(ItemRow[ColumnName], value))
+            if (Equals(Item[ColumnName], value))
                 return;
 
-            ItemRow[ColumnName] = value;
+            Item[ColumnName] = value;
 
-            var builder = new System.Data.SqlClient.SqlCommandBuilder(inventory.Adapter);
-            inventory.Adapter.UpdateCommand = builder.GetUpdateCommand();
-            inventory.Update(ItemRow);
+            inventory.UpdateRow(Item.liId, Item.Name, Item.Price, Item.Quantity, Item.Unit, Item.Category);
+            (Application.Current.MainWindow as MainWindow).UpdateTable();
         }
     }
 }

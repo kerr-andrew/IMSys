@@ -20,6 +20,10 @@ namespace IMSys
             MainWindow window = new MainWindow();
             InventoryViewModel ivm = new InventoryViewModel();
             window.DataContext = ivm;
+            MainWindow = window;
+
+            window.Initialize();
+
             window.Show();
         }
     }

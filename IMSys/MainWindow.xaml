@@ -9,7 +9,7 @@
     <Window.Resources>
         <local:CategoryConverter x:Key="CategoryConverterKey" />
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="MainGrid">
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Inventory">
@@ -20,12 +20,12 @@
         </DockPanel>
         <DataGrid x:Name="Inventory" ItemsSource="{Binding Items}"  CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" />
-                <DataGridTextColumn Binding="{Binding Price}" />
-                <DataGridTextColumn Binding="{Binding Quantity}" />
-                <DataGridTextColumn Binding="{Binding Unit}" />
-                <DataGridTextColumn Binding="{Binding Value}" />
-                <DataGridComboBoxColumn SelectedValueBinding="{Binding Category}"
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Unit" Binding="{Binding Unit}" />
+                <DataGridTextColumn Header="Value" Binding="{Binding Value}" IsReadOnly="True" />
+                <DataGridComboBoxColumn Header="Category" SelectedValueBinding="{Binding Category}"
                                         DisplayMemberPath="Name"
                                         SelectedValuePath="Id"
                                         SelectedItemBinding="{Binding Path=Category, Converter={StaticResource CategoryConverterKey}}">

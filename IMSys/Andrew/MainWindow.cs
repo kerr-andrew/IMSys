@@ -15,7 +15,6 @@ namespace IMSys
         IChangeControl clickMenu = null;
         protected void InitializeAndrew()
         {
-
             Inventory.MouseRightButtonUp += Inventory_MouseRightButtonUp;
             Inventory.PreviewMouseLeftButtonDown += Inventory_PreviewMouseLeftButtonDown;
         }

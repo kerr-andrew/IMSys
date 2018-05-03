@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Reflection;
 
 namespace IMSys
 {
@@ -15,9 +16,19 @@ namespace IMSys
         static IMSysDBDataSetTableAdapters.CategoriesTableAdapter categoryAdapter = Application.Current.Properties["Categories"] as IMSysDBDataSetTableAdapters.CategoriesTableAdapter;
 
         public int liId;
-        private string _name;
-        public string Name { get { return _name; }
-            set { _name = value; } }
+
+        public object this[string name]
+        {
+            get
+            {
+                return GetType().InvokeMember(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetProperty, Type.DefaultBinder, this, null);
+            }
+            set
+            {
+                GetType().InvokeMember(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty, Type.DefaultBinder, this, new object[] { value });
+            }
+        }
+        public string Name { get; set; }
         private decimal _price;
         public decimal Price {
             get { return _price; }
@@ -40,7 +51,7 @@ namespace IMSys
             }
         }
         public string Unit { get; set; }
-        public decimal Value { get { return Price * Quantity; } }
+        public decimal Value { get { return Price * Quantity; } set { } }
         private int _category;
         public int Category
         {

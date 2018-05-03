@@ -166,15 +166,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dbo.Procedure.sql" />
     <Content Include="IMSys.csproj.user" />
     <Content Include="IMSysDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\equal.png" />
     <Resource Include="Resources\plusmin.png" />
     <Content Include="IMSysDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>IMSysDB.mdf</DependentUpon>
     </Content>
     <Content Include="Scripts\0.0.1\GenerateTestData.sql" />

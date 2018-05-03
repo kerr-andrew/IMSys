@@ -60,9 +60,13 @@ namespace IMSys
                     ItemsCollection.ElementAt(count).Unit.ToString(),
                     ItemsCollection.ElementAt(count).Category
                 );
-            count++;
+                count++;
             }
-            ((MainWindow)this.Owner).FIllItemSource();
+
+            foreach (Item item in ItemsCollection)
+                inventoryAdapter.AddRow(item.Name, item.Price, item.Quantity, item.Unit, item.Category);
+
+            (Owner as MainWindow).UpdateTable();
         }
 
         /*private void AddItemClick(object sender, RoutedEventArgs e)

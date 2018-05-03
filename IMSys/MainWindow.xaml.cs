@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 
 namespace IMSys
 {
+    public delegate void InitializingComponentsEvent();
 
     public partial class MainWindow : Window
     {
@@ -33,14 +34,30 @@ namespace IMSys
 
         public ObservableCollection<Category> Categories { get; } = Category.GetCategories();
         public DataGridComboBoxColumn col = null;
+
+        public event InitializingComponentsEvent InitializingComponents;
+
         public MainWindow()
         {
-           
-            InitializeComponent();
+            InitializingComponents += InitializeComponent;
+            InitializingComponents += MainWindow_InitializingComponents;
+            InitializingComponents += InitializeAndrew;
+            InitializingComponents += InitializeAlex;
 
+        }
+
+        public void Initialize()
+        {
+            if (!IsInitialized)
+                InitializingComponents();
+        }
+
+        private void MainWindow_InitializingComponents()
+        {
             Inventory.Loaded += Inventory_Loaded;
-            FIllItemSource();
 
+            UpdateTable();
+            Inventory.FastEdit();
         }
 
         private void Inventory_Loaded(object sender, RoutedEventArgs e)
@@ -64,6 +81,14 @@ namespace IMSys
             var item = Inventory.CurrentItem as Item;
             var box = sender as ComboBox;
             var cat = box.SelectedItem as Category;
+        }
+
+        public void UpdateTable()
+        {
+            (DataContext as InventoryViewModel).Items.Clear();
+            foreach (var item in Item.GetItems())
+                (DataContext as InventoryViewModel).Items.Add(item);
+
         }
     }
 }

@@ -27,6 +27,8 @@ namespace IMSys
             Item item = e.Row.DataContext as IMSys.Item;
             //IMSysDBDataSet.InventoryRow inventoryRow = (e.Row.DataContext as System.Data.DataRowView).Row as IMSysDBDataSet.InventoryRow;
             DataGridColumn dataGridColumn = e.Column;
+            if (e.Column.Header == null)
+                return;
             string a = "";
             if (e.Column is DataGridComboBoxColumn)
                 a = "Category";
@@ -52,7 +54,7 @@ namespace IMSys
                     item.Unit = t.Text;
                     break;
                 case "Category":
-                    item.Category = (int)(e.EditingElement as System.Windows.Controls.ComboBox).SelectedValue;
+                    item.Category = (int)((e.EditingElement as System.Windows.Controls.ComboBox).SelectedValue ?? 1);
                     break;
                 default:
                     break;
@@ -75,10 +77,9 @@ namespace IMSys
             deleteItemWindow.Show();
         }
 
-        public void FIllItemSource()
+        protected void InitializeAlex()
         {
-            Inventory.ItemsSource = Item.GetItems();
-            Inventory.FastEdit();
+
         }
 
     }
