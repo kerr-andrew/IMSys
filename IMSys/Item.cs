@@ -21,7 +21,7 @@ namespace IMSys
         private decimal _price;
         public decimal Price {
             get { return _price; }
-            set { if (_price != value) { _price = value; OnPropertyChanged("Value"); } } }        
+            set { if (_price != value) { _price = value; OnPropertyChanged("Value"); } } }
         private int _quantity;
         public int Quantity
         {
@@ -41,19 +41,8 @@ namespace IMSys
         }
         public string Unit { get; set; }
         public decimal Value { get { return Price * Quantity; } }
-        private int _category;
-        public int Category
-        {
-            get { return _category; }
-            set
-            {
-                if (value != _category)
-                {
-                    _category = value;
-                    OnPropertyChanged("Category");
-                }
-            }
-        }
+        public int category;
+        public string CategoryName { get; set; }
         public Item()
         {
 
@@ -71,8 +60,7 @@ namespace IMSys
             Price = itemPrice;
             Quantity = itemQuantity;
             Unit = itemUnit;
-            Category = categoryId;
-
+            CategoryName = getCategory(categoryId);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -168,15 +156,5 @@ namespace IMSys
         }*/
 
     }
-    public class InventoryViewModel
-    {
-        public ObservableCollection<Item> Items { get; set; }
-        public ObservableCollection<Category> Categories { get; set; }
-        public InventoryViewModel()
-        {
-            Items = Item.GetItems();
-            Categories = Category.GetCategories();
-        }
-        public Category SelectedItem { get; set; }
-    }
+
 }

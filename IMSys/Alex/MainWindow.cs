@@ -52,42 +52,12 @@ namespace IMSys
                     item.Unit = t.Text;
                     break;
                 case "Category":
-                    item.Category = (int)(e.EditingElement as System.Windows.Controls.ComboBox).SelectedValue;
+                    item.category = Category.GetId(((e.EditingElement as System.Windows.Controls.ComboBox).SelectedValue as Category).Name);
                     break;
                 default:
                     break;
             }
-            inventoryAdapter.UpdateRow(item.liId, item.Name, item.Price, item.Quantity, item.Unit, item.Value, item.Category);
-            /*switch (a) {
-                case "itemItem":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, t.Text,
-                    inventoryRow.Price, inventoryRow.Quantity, inventoryRow.Unit, inventoryRow.Value);
-                    break;
-                case "Price":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.Name, Decimal.Parse(t.Text),
-                    inventoryRow.Quantity, inventoryRow.Unit, inventoryRow.Value);
-                    break;
-                case "Quantity":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.Name, inventoryRow.Price,
-                    Int32.Parse(t.Text), inventoryRow.Unit, inventoryRow.Value);
-                    break;
-                case "Unit":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.Name, inventoryRow.Price,
-                    inventoryRow.Quantity, t.Text, inventoryRow.Value);
-                    break;
-                case "Value":
-                    inventoryAdapter.UpdateRow(inventoryRow.liId, inventoryRow.Name, inventoryRow.Price,
-                    inventoryRow.Quantity, inventoryRow.Unit, Decimal.Parse(t.Text));
-                    break;
-                case "Category":
-                    DataGridComboBoxColumn col = new DataGridComboBoxColumn();
-                    col.Header = "Category";
-                    Inventory.Columns.Add(col);
-                    col.ItemsSource = Category.GetCategories();
-                    break;
-                default:
-                    break;
-            }*/
+            inventoryAdapter.UpdateRow(item.liId, item.Name, item.Price, item.Quantity, item.Unit, item.Value, item.category);
 
         }
 
@@ -109,7 +79,7 @@ namespace IMSys
         public void FIllItemSource()
         {
             Inventory.ItemsSource = Item.GetItems();
-            Inventory.FastEdit();
+            
         }
 
     }

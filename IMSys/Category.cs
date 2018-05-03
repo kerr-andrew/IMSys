@@ -69,5 +69,10 @@ namespace IMSys
             ObservableCollection<Category> categories = new ObservableCollection<Category>(data);
             return categories;
         }
+
+        public static int GetId(string categoryName)
+        {
+            return (int)categoryAdapter.GetId(categoryName);
+        }
     }
 }

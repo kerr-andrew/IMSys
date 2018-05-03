@@ -45,7 +45,7 @@ namespace IMSys
 
         private void Inventory_Loaded(object sender, RoutedEventArgs e)
         {
-           /* col = new DataGridComboBoxColumn
+           col = new DataGridComboBoxColumn
             {
                 Header = "Category",
                 ItemsSource = Category.GetCategories(),
@@ -56,14 +56,9 @@ namespace IMSys
             col.TextBinding = new Binding("Name") { Mode = BindingMode.TwoWay };
             
             Inventory.Columns[Inventory.Columns.Count - 1] = col;
-            Inventory.FastEdit();*/
+            Inventory.FastEdit();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var item = Inventory.CurrentItem as Item;
-            var box = sender as ComboBox;
-            var cat = box.SelectedItem as Category;
-        }
+
     }
 }

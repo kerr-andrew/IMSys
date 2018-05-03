@@ -15,6 +15,18 @@ BEGIN TRANSACTION
 		DROP TABLE Inventory
 	END
 
+	IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES 
+           WHERE TABLE_NAME = N'Categories')
+	BEGIN 
+		DROP TABLE Categories
+	END
+
+	CREATE TABLE Categories(
+	liId int NOT NULL IDENTITY(1,1),
+	CategoryName VARCHAR(MAX),
+	PRIMARY KEY (liId)
+	)
+
 	CREATE TABLE Inventory(
 	liId int NOT NULL IDENTITY(1,1),	
 	itemName VARCHAR(MAX),
@@ -27,11 +39,13 @@ BEGIN TRANSACTION
 	FOREIGN KEY (CategoryId) REFERENCES Categories(liId)
 	);
 
-	INSERT INTO Inventory VALUES('Copper Wire','0.09','20','ft','1.80',1),
-								('Plug','2.99','39','unit','116.61',1),
-								('Outlet','3.99','500','outlets','300.00',1,
-								('maretts','0.01','2000','maretts','20.00',1),
-								('screws','50.00','20000','screws','2000000.00',1);
+	INSERT INTO Categories VALUES('None'),('Deez Nutz'),('DN');
+
+	INSERT INTO Inventory VALUES('Copper Wire','0.09','20','ft','1.80','1'),
+								('Plug','2.99','39','unit','116.61','1'),
+								('Outlet','3.99','500','outlets','300.00','1'),
+								('maretts','0.01','2000','maretts','20.00','1'),
+								('screws','50.00','20000','screws','2000000.00','1');
 
 COMMIT TRANSACTION
 
