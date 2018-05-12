@@ -21,10 +21,10 @@
         <DataGrid x:Name="Inventory" ItemsSource="{Binding Items}"  CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
-                <DataGridTextColumn Header="Unit" Binding="{Binding Unit}" />
-                <DataGridTextColumn Header="Value" Binding="{Binding Value}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price, ValidatesOnExceptions=True}" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, ValidatesOnExceptions=True}" />
+                <DataGridTextColumn Header="Unit" Binding="{Binding Unit, ValidatesOnExceptions=True}" />
+                <DataGridTextColumn Header="Value" Binding="{Binding Value, ValidatesOnExceptions=True}" IsReadOnly="True" />
                 <DataGridComboBoxColumn Header="Category" SelectedValueBinding="{Binding Category}"
                                         DisplayMemberPath="Name"
                                         SelectedValuePath="Id"
