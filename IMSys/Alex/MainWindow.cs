@@ -24,7 +24,6 @@ namespace IMSys
         private void Inventory_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             System.Windows.Controls.TextBox t = e.EditingElement as System.Windows.Controls.TextBox;  // Assumes columns are all TextBoxes
-            
             Item item = e.Row.DataContext as IMSys.Item;
             //IMSysDBDataSet.InventoryRow inventoryRow = (e.Row.DataContext as System.Data.DataRowView).Row as IMSysDBDataSet.InventoryRow;
             DataGridColumn dataGridColumn = e.Column;
@@ -44,11 +43,9 @@ namespace IMSys
                 case "Price":
                     decimal tempd;
                     if (Decimal.TryParse(t.Text, out tempd))
-                        if (t.Text.IndexOf(".") == -1)
-                        {
-                            t.Text = string.Format("{0:##0.00}", Decimal.Parse(t.Text));
-                        }
+                    {
                         item.Price = tempd;
+                    }
                     break;
                 case "Quantity":
                     int tempi;

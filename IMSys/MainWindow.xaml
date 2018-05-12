@@ -7,24 +7,38 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
-        <local:CategoryConverter x:Key="CategoryConverterKey" />
+        <ResourceDictionary>
+            <local:CategoryConverter x:Key="CategoryConverterKey" />
+        </ResourceDictionary>
     </Window.Resources>
     <Grid x:Name="MainGrid">
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Inventory">
-                    <MenuItem x:Name="addItem" Header="Add Item" HorizontalAlignment="Left" Click="AddItemClick"/>
-                    <MenuItem x:Name="deleteItem" Header="Delete Item" VerticalAlignment="Center" Margin="0" Click="DeleteItemClick"/>
-                </MenuItem>
-            </Menu>
-        </DockPanel>
-        <DataGrid x:Name="Inventory" ItemsSource="{Binding Items}"  CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0" AutoGenerateColumns="False">
+        <Menu  VerticalAlignment="Top">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Inventory">
+                <MenuItem x:Name="addItem" Header="Add Item" HorizontalAlignment="Left" Click="AddItemClick"/>
+                <MenuItem x:Name="deleteItem" Header="Delete Item" Height="{Binding Path=Height, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}" Margin="0" Click="DeleteItemClick"/>
+            </MenuItem>
+            <MenuItem HorizontalAlignment="Right" Margin="0" Padding="0">
+                <MenuItem.Header>
+                    <Grid Width="242">
+                        <TextBox Text="blah" Width="160" VerticalAlignment="Stretch" HorizontalAlignment="Left"></TextBox>
+                        <ComboBox Width="80" HorizontalAlignment="Right" SelectedValue="{Binding Category}" DisplayMemberPath="Name" SelectedItem="{Binding Path=Category, Converter={StaticResource CategoryConverterKey}}" ItemsSource="{Binding Path=DataContext.CategorySearch, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                    </Grid>
+                </MenuItem.Header>
+            </MenuItem>
+            
+        </Menu>
+        <DataGrid x:Name="Inventory" ItemsSource="{Binding Items}" ColumnWidth="*" CanUserReorderColumns="False" CellEditEnding="Inventory_CellEditEnding" Margin="0,24,0,0" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Price, ValidatesOnExceptions=True}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price, ValidatesOnExceptions=True, StringFormat=0.00}" />
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, ValidatesOnExceptions=True}" />
                 <DataGridTextColumn Header="Unit" Binding="{Binding Unit, ValidatesOnExceptions=True}" />
-                <DataGridTextColumn Header="Value" Binding="{Binding Value, ValidatesOnExceptions=True}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Value" Binding="{Binding Value, ValidatesOnExceptions=True, StringFormat=0.00}" IsReadOnly="True" />
                 <DataGridComboBoxColumn Header="Category" SelectedValueBinding="{Binding Category}"
                                         DisplayMemberPath="Name"
                                         SelectedValuePath="Id"
@@ -32,7 +46,6 @@
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="{x:Type ComboBox}">
                             <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Categories, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-                            <EventSetter Event="SelectionChanged" Handler="ComboBox_SelectionChanged" />
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
                     <DataGridComboBoxColumn.EditingElementStyle>

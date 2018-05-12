@@ -78,6 +78,7 @@ namespace IMSys
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             var item = Inventory.CurrentItem as Item;
             var box = sender as ComboBox;
             var cat = box.SelectedItem as Category;

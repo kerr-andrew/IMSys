@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Reflection;
-
+using System.Collections.Specialized;
 namespace IMSys
 {
     public class Item : INotifyPropertyChanged
@@ -184,11 +184,26 @@ namespace IMSys
     {
         public ObservableCollection<Item> Items { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
+        public ObservableCollection<Category> CategorySearch { get; set; }
         public InventoryViewModel()
         {
             Items = Item.GetItems();
             Categories = Category.GetCategories();
+            CategorySearch = new ObservableCollection<Category>(Categories);
+            CategorySearch.Add(new Category(0, "All"));
+            CategorySearch.Move(CategorySearch.Count - 1, 0);
+            Categories.CollectionChanged += (s, e) => {
+                if (e.Action == NotifyCollectionChangedAction.Add)
+                    foreach (var i in e.NewItems)
+                        CategorySearch.Add(i as Category);
+
+                if (e.Action == NotifyCollectionChangedAction.Remove)
+                    foreach (var i in e.OldItems)
+                        CategorySearch.Remove(i as Category);
+
+            };
         }
+
         public Category SelectedItem { get; set; }
     }
 }
