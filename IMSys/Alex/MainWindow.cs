@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -78,10 +79,24 @@ namespace IMSys
             deleteItemWindow.Owner = this;
             deleteItemWindow.Show();
         }
-
+        
         protected void InitializeAlex()
         {
+            ICollectionView view = CollectionViewSource.GetDefaultView(Inventory.ItemsSource);
+            view.Filter = SearchFilter;
+        }
 
+        private bool SearchFilter(object item)
+        {
+            if (String.IsNullOrEmpty(searchFilter.Text))
+                return true;
+            else
+                return ((item as Item).Name.IndexOf(searchFilter.Text, StringComparison.CurrentCultureIgnoreCase) >= 0);
+        }
+
+        public void TextBoxSearch(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(Inventory.ItemsSource).Refresh();       
         }
 
     }
