@@ -68,23 +68,5 @@ namespace IMSys
 
             (Owner as MainWindow).UpdateTable();
         }
-
-        /*private void AddItemClick(object sender, RoutedEventArgs e)
-        {
-            
-            string name = txtItemName.Text;
-            decimal price;
-            bool result1 = Decimal.TryParse(txtPrice.Text, out price);
-            int quantity;
-            bool result2 = Int32.TryParse(txtQuantity.Text, out quantity);
-            string unit = txtUnit.Text;
-            decimal? value = null;
-
-            if (result1 && result2) {
-                value = price * quantity;
-            }
-            if(value != null)
-                inventoryAdapter.AddRow(name, price, quantity, unit, value.Value);
-        }*/
     }
 }

@@ -120,64 +120,6 @@ namespace IMSys
             return items;
 
         }
-        
-        /*
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
-
-        private string _name;
-        public string Name
-        {
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged("Name");
-                }
-            }
-            get
-            {
-                return _name;
-            }
-        }
-
-        private int _quantity;
-        public int Quantity
-        {
-            set
-            {
-                if (_quantity != value)
-                {
-                    _quantity = value;
-                    OnPropertyChanged("Quantity");
-                }
-            }
-            get
-            {
-                return _quantity;
-            }
-        }
-
-        private decimal _price;
-        public decimal Price
-        {
-            set
-            {
-                if (_price != value)
-                {
-                    _price = value;
-                    OnPropertyChanged("Price");
-                }
-            }
-            get
-            {
-                return _price;
-            }
-        }*/
 
     }
     public class InventoryViewModel
