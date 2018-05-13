@@ -25,7 +25,8 @@
             <MenuItem HorizontalAlignment="Right" Margin="0" Padding="0">
                 <MenuItem.Header>
                     <Grid Width="242">
-                        <TextBox x:Name="searchFilter" Width="160" Text="{Binding Path=SearchText}" TextChanged="TextBoxSearch" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                        <TextBox x:Name="searchFilter" Width="160" TextChanged="TextBoxSearch" 
+                                 VerticalAlignment="Stretch" HorizontalAlignment="Left" GotFocus="searchFilter_GotFocus">
                             <TextBox.Style>
                                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                                     <Style.Resources>
@@ -49,7 +50,10 @@
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <ComboBox Width="80" HorizontalAlignment="Right" SelectedValue="{Binding Category}" DisplayMemberPath="Name" SelectedItem="{Binding Path=Category, Converter={StaticResource CategoryConverterKey}}" ItemsSource="{Binding Path=DataContext.CategorySearch, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                        <ComboBox x:Name="categoryFilter" Width="80" HorizontalAlignment="Right" SelectedIndex="0" DisplayMemberPath="Name" 
+                                  SelectionChanged="TextBoxSearch" GotFocus="searchFilter_GotFocus"
+                                  ItemsSource="{Binding Path=DataContext.CategorySearch, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" >
+                        </ComboBox>
                     </Grid>
                 </MenuItem.Header>
             </MenuItem>
@@ -75,7 +79,7 @@
                     <DataGridComboBoxColumn.EditingElementStyle>
                         <Style TargetType="{x:Type ComboBox}">
                             <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Categories, Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-                            <EventSetter Event="SelectionChanged" Handler="ComboBox_SelectionChanged" />
+                            <EventSetter Event="Loaded" Handler="ComboBox_Loaded" />
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>

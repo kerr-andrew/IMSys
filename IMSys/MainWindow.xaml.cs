@@ -54,34 +54,8 @@ namespace IMSys
 
         private void MainWindow_InitializingComponents()
         {
-            Inventory.Loaded += Inventory_Loaded;
-
             UpdateTable();
             Inventory.FastEdit();
-        }
-
-        private void Inventory_Loaded(object sender, RoutedEventArgs e)
-        {
-           /* col = new DataGridComboBoxColumn
-            {
-                Header = "Category",
-                ItemsSource = Category.GetCategories(),
-                
-               
-            };
-            col.DisplayMemberPath = "Name";
-            col.TextBinding = new Binding("Name") { Mode = BindingMode.TwoWay };
-            
-            Inventory.Columns[Inventory.Columns.Count - 1] = col;
-            Inventory.FastEdit();*/
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            var item = Inventory.CurrentItem as Item;
-            var box = sender as ComboBox;
-            var cat = box.SelectedItem as Category;
         }
 
         public void UpdateTable()
@@ -89,7 +63,16 @@ namespace IMSys
             (DataContext as InventoryViewModel).Items.Clear();
             foreach (var item in Item.GetItems())
                 (DataContext as InventoryViewModel).Items.Add(item);
+        }
 
+        private void ComboBox_Loaded(object sender, RoutedEventArgs evt)
+        {
+            (sender as ComboBox).DropDownClosed += (s, e) => Inventory.CommitEdit();
+        }
+
+        private void searchFilter_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Inventory.CommitEdit();
         }
     }
 }

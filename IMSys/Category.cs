@@ -47,7 +47,7 @@ namespace IMSys
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
             categoryAdapter.Update(Name, Id);
         }
-
+        public Category() { Id = int.MinValue; Name = "DEFAULT"; }
         public Category(int id, string category)
         {
             Id = id;

@@ -87,7 +87,6 @@
     <Compile Include="AddItem.xaml.cs">
       <DependentUpon>AddItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Alex\Extensions.cs" />
     <Compile Include="Alex\MainWindow.cs" />
     <Compile Include="Andrew\ExtensionMethods.cs" />
     <Compile Include="Andrew\GenericChangeControl.cs" />

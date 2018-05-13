@@ -41,22 +41,12 @@ namespace IMSys
                 clickMenu = null;
             }
         }
-        private T FindVisualParent<T>(DependencyObject child) where T : DependencyObject
-        {
-            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
-            if (parentObject == null) return null;
-            T parent = parentObject as T;
-            if (parent != null)
-                return parent;
-            else
-                return FindVisualParent<T>(parentObject);
-        }
         private DataGridCellInfo? GetCurrentCell()
         {
             Point pt = Mouse.GetPosition(Inventory);
             DataGridCell cell = null;
             VisualTreeHelper.HitTest(Inventory, null, (res) => {
-                DataGridCell temp_cell = FindVisualParent<DataGridCell>(res.VisualHit);
+                DataGridCell temp_cell = res.VisualHit.FindVisualParent<DataGridCell>();
                 if (temp_cell != null)
                 {
                     cell = temp_cell;

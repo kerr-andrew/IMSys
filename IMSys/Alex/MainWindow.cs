@@ -88,15 +88,16 @@ namespace IMSys
 
         private bool SearchFilter(object item)
         {
-            if (String.IsNullOrEmpty(searchFilter.Text))
-                return true;
-            else
-                return ((item as Item).Name.IndexOf(searchFilter.Text, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            var row = item as Item;
+            var cat = categoryFilter.SelectedItem as Category;
+            return (String.IsNullOrWhiteSpace(searchFilter.Text) ? true : row.Name.IndexOf(searchFilter.Text, StringComparison.CurrentCultureIgnoreCase) >= 0) &&
+                (cat == null || cat.Id == 0 || cat.Id == row.Category);
         }
 
-        public void TextBoxSearch(object sender, RoutedEventArgs e)
+        public void TextBoxSearch(object sender, EventArgs e)
         {
-            CollectionViewSource.GetDefaultView(Inventory.ItemsSource).Refresh();       
+            if (!Inventory.IsEditing())
+                CollectionViewSource.GetDefaultView(Inventory.ItemsSource).Refresh();       
         }
 
     }
