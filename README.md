@@ -8,7 +8,13 @@ fathers startup electrical company to help him manage his inventory and his spen
 
 Requirements
 
-1.Display current inventory(Amount, Item Name, Price, Unit, Value, Category) on the screen.2.Adding New Items to the Inventory3.Deleting Items From inventory4.Changing Items Quantities5.Save Values to the Database6.Retrieve Values on Program Startup using Non-Persistent Database Connection7.Sort Columns By Highest to Lowest/Alphabetically Or Reverse8.Search Bar That Filters Results As You Type
+1.Display current inventory(Amount, Item Name, Price, Unit, Value, Category) on the screen. 
+2.Adding New Items to the Inventory 
+3.Deleting Items From inventory 
+4.Changing Items Quantities 
+5.Save Values to the Database 
+6.Retrieve Values on Program Startup using Non-Persistent Database Connection7.Sort Columns By Highest to Lowest/Alphabetically Or Reverse 
+8.Search Bar That Filters Results As You Type
 
 It is currently not finished. 
 
