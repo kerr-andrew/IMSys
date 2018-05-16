@@ -21,6 +21,15 @@ It is not yet done currently finished.
 
 How to use. Curerntly it takes a bit to setup we will be making this process easier over the next few weeks. (Last edited May 16th 2018)
 
+STEPS TO SETUP
+1. Create an mdf file. 
+2. Run all of the stored procedures
+3. Create querys in the xsd file to make the stored procedures actual methods. 
+4. GetCategory needs to return a singular value the rest return notihing. Use existing stored proceudres to create the method and 
+give them the default name. 
+5. (Optional)Run generate test data. 
+It should now work.
+
 TO ADD AN ITEM: Add an item by clicking invetory in the menu bar ands electing add item in the drop down. Then you can fill out a table 
 with all the items information. So far we have name price quntity unit and value which is a price * quantity calculation as well as 
 category. Add as many items as you ned then click add at the bototm to see they are added to your inventory. 
