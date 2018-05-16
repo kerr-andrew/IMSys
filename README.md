@@ -19,7 +19,7 @@ Search Bar That Filters Results As You Type
 
 It is not yet done currently finished. 
 
-How to use. Curerntly it takes a bit to setup we will be making this process easier over the next few weeks. (Last edited May 16th 2018)
+How to use. Currently it takes a bit to setup we will be making this process easier over the next few weeks. (Last edited May 16th 2018)
 
 STEPS TO SETUP
 1. Create an mdf file. 
