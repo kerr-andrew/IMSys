@@ -8,7 +8,7 @@
         Title="ManageCategories" Height="450" Width="600">
     <Grid Margin="0,1,0,-1">
         <Label x:Name="lblSelectCategory" Content="Select the Category you wish to manage:" Height="30" Margin="100,32,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <ComboBox  x:Name="cbxSelectedCategory" DisplayMemberPath="Name" ItemsSource="{Binding Path=Categories, Mode=TwoWay, Source={x:Static local:InventoryViewModel.Model}}" Height="24" Width="132" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,34,110,0"  SelectionChanged="CategorySelectedEvent"/>
+        <ComboBox  x:Name="cbxSelectedCategory" DisplayMemberPath="Name" ItemsSource="{Binding Path=ChangableCategories, Mode=TwoWay, Source={x:Static local:InventoryViewModel.Model}}" Height="24" Width="132" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,34,110,0" SelectedIndex="0" />
         <Label x:Name="lblAddCategory" Content="or" HorizontalAlignment="Left" Margin="100,74,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnAddCategory" Content="Add a New Category" HorizontalAlignment="Right" Margin="0,77,110,0" VerticalAlignment="Top" Width="132" Height="24" Click="AddNewCategoryEvent"/>
         <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="150,157,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.027,0.15" IsEnabled="False" Click="DeleteCategoryEvent"/>

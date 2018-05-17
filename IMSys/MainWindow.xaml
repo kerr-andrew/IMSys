@@ -21,6 +21,7 @@
             <MenuItem Header="Inventory">
                 <MenuItem x:Name="addItem" Header="Add Item" HorizontalAlignment="Left" Click="AddItemClick"/>
                 <MenuItem x:Name="deleteItem" Header="Delete Item" Margin="0" Click="DeleteItemClick"/>
+                <MenuItem x:Name="manageCategories" Header="Manage Categories" Margin="0" Click="ManageCategoriesClick"/>
             </MenuItem>
             <MenuItem HorizontalAlignment="Right" Margin="0" Padding="0">
                 <MenuItem.Header>

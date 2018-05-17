@@ -26,10 +26,12 @@ namespace IMSys
         public ManageCategories()
         {
             InitializeComponent();
+            cbxSelectedCategory.SelectionChanged += CategorySelectedEvent;
         }
 
         private void CategorySelectedEvent(object sender, RoutedEventArgs e)
         {
+
             btnDelete.IsEnabled = true;
             btnRename.IsEnabled = true;
             lblRename.Visibility = Visibility.Hidden;
@@ -49,7 +51,9 @@ namespace IMSys
 
         private void DeleteCategoryEvent(object sender, RoutedEventArgs e)
         {
-            DeleteCategoriesPopup deleteCategoriesWindow = new DeleteCategoriesPopup();
+            var coll = new System.Collections.ObjectModel.ObservableCollection<Category>(InventoryViewModel.Model.Categories);
+            coll.Remove(cbxSelectedCategory.SelectedItem as Category);
+            DeleteCategoriesPopup deleteCategoriesWindow = new DeleteCategoriesPopup(cbxSelectedCategory.SelectedItem as Category, coll);
             deleteCategoriesWindow.Owner = this;
             deleteCategoriesWindow.Show();
         }

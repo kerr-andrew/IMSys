@@ -5,19 +5,18 @@ GO
 
 
 CREATE PROCEDURE [dbo].[RemoveCategory]
-	@categoryChange int,
-	@categoryDelete varchar(max)
-
+	@removed int,
+	@newid int
 AS
 
 	BEGIN TRANSACTION
 
 	UPDATE Inventory 
-	SET CategoryId = @categoryChange
-	WHERE CategoryId = (Select liId FROM Categories WHERE Name = @categoryDelete);
+	SET CategoryId = @newid
+	WHERE CategoryId = @removed
 
 	DELETE FROM Categories WHERE
-	Name = @categoryDelete;
+	liId = @removed
 
 	COMMIT TRANSACTION
 

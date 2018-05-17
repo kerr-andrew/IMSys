@@ -126,12 +126,15 @@ namespace IMSys
     {
         public ObservableCollection<Item> Items { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
+        public ObservableCollection<Category> ChangableCategories { get; set; }
         public ObservableCollection<Category> CategorySearch { get; set; }
         private InventoryViewModel()
         {
             Items = Item.GetItems();
             Categories = Category.GetCategories();
             CategorySearch = new ObservableCollection<Category>(Categories);
+            ChangableCategories = new ObservableCollection<Category>(Categories);
+
             CategorySearch.Add(new Category(0, "All"));
             CategorySearch.Move(CategorySearch.Count - 1, 0);
             Categories.CollectionChanged += (s, e) => {
@@ -143,6 +146,18 @@ namespace IMSys
                     foreach (var i in e.OldItems)
                         CategorySearch.Remove(i as Category);
 
+            };
+
+            ChangableCategories.Remove(ChangableCategories.Where((cat) => cat.Id == 1).FirstOrDefault());
+            ChangableCategories.CollectionChanged += (s, e) =>
+            {
+                if (e.Action == NotifyCollectionChangedAction.Add)
+                    foreach (var i in e.NewItems)
+                        Categories.Add(i as Category);
+
+                if (e.Action == NotifyCollectionChangedAction.Remove)
+                    foreach (var i in e.OldItems)
+                        Categories.Remove(i as Category);
             };
         }
         private static InventoryViewModel _instance = null;

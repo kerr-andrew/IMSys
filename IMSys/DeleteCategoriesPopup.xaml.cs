@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +20,22 @@ namespace IMSys
     /// </summary>
     public partial class DeleteCategoriesPopup : Window
     {
-        public DeleteCategoriesPopup()
+        static IMSysDBDataSetTableAdapters.CategoriesTableAdapter categoryAdapter = Application.Current.Properties["Categories"] as IMSysDBDataSetTableAdapters.CategoriesTableAdapter;
+
+        public ObservableCollection<Category> UpdatedCategoryList { get; set; }
+        public Category BeingRemoved { get; set; }
+        public DeleteCategoriesPopup(Category removed, ObservableCollection<Category> updated)
         {
+            BeingRemoved = removed;
+            UpdatedCategoryList = updated;
             InitializeComponent();
         }
 
         private void RemoveCategoryClick(object sender, RoutedEventArgs e)
         {
-            Category.GetId(cbxReplacement.SelectedValue)
+            categoryAdapter.RemoveCategory(BeingRemoved.Id, (cbxReplacement.SelectedItem as Category).Id);
+            InventoryViewModel.Model.ChangableCategories.Remove(BeingRemoved);
+            (App.Current.Windows[0] as MainWindow).UpdateTable();
         }
     }
 }

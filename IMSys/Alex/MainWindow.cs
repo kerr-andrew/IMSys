@@ -93,7 +93,12 @@ namespace IMSys
             return (String.IsNullOrWhiteSpace(searchFilter.Text) ? true : row.Name.IndexOf(searchFilter.Text, StringComparison.CurrentCultureIgnoreCase) >= 0) &&
                 (cat == null || cat.Id == 0 || cat.Id == row.Category);
         }
-
+        private void ManageCategoriesClick(object sender, RoutedEventArgs e)
+        {
+            ManageCategories manageCategoriesWindow = new ManageCategories();
+            manageCategoriesWindow.Owner = this;
+            manageCategoriesWindow.Show();
+        }
         public void TextBoxSearch(object sender, EventArgs e)
         {
             if (Inventory == null)

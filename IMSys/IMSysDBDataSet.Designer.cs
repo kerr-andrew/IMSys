@@ -1388,8 +1388,8 @@ namespace IMSys.IMSysDBDataSetTableAdapters {
             this._commandCollection[3].CommandText = "dbo.RemoveCategory";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@categoryChange", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@categoryDelete", global::System.Data.SqlDbType.VarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@removed", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@newid", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[4].Connection = this.Connection;
             this._commandCollection[4].CommandText = "dbo.RenameCategory";
@@ -1616,19 +1616,19 @@ namespace IMSys.IMSysDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int RemoveCategory(global::System.Nullable<int> categoryChange, string categoryDelete) {
+        public virtual int RemoveCategory(global::System.Nullable<int> removed, global::System.Nullable<int> newid) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
-            if ((categoryChange.HasValue == true)) {
-                command.Parameters[1].Value = ((int)(categoryChange.Value));
+            if ((removed.HasValue == true)) {
+                command.Parameters[1].Value = ((int)(removed.Value));
             }
             else {
                 command.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((categoryDelete == null)) {
-                command.Parameters[2].Value = global::System.DBNull.Value;
+            if ((newid.HasValue == true)) {
+                command.Parameters[2].Value = ((int)(newid.Value));
             }
             else {
-                command.Parameters[2].Value = ((string)(categoryDelete));
+                command.Parameters[2].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
