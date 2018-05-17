@@ -161,6 +161,11 @@ namespace IMSys.Controls
             _contentLoaded = true;
         }
 
+        ~ChangeControl()
+        {
+            if (Parent != null && Parent is Grid && (Parent as Grid).Children.Contains(this))
+                (Parent as Grid).Children.Remove(this);
+        }
 
         public ChangeControl(Item row)
         {

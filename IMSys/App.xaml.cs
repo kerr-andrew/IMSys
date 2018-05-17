@@ -18,8 +18,7 @@ namespace IMSys
             base.OnStartup(e);
 
             MainWindow window = new MainWindow();
-            InventoryViewModel ivm = new InventoryViewModel();
-            window.DataContext = ivm;
+            window.DataContext = InventoryViewModel.Model;
             MainWindow = window;
 
             window.Initialize();

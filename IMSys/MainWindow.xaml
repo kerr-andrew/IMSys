@@ -9,19 +9,29 @@
     <Window.Resources>
         <local:CategoryConverter x:Key="CategoryConverterKey" />
     </Window.Resources>
+    
     <Grid x:Name="MainGrid">
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Inventory">
-                    <MenuItem x:Name="addItem" Header="Add Item" HorizontalAlignment="Left" Click="AddItemClick"/>
-                    <MenuItem x:Name="deleteItem" Header="Delete Item" VerticalAlignment="Center" Margin="0" Click="DeleteItemClick"/>
-                </MenuItem>
-            </Menu>
-        </DockPanel>
-        <DataGrid x:Name="Inventory" ItemsSource="{Binding Items}"  CellEditEnding="Inventory_CellEditEnding" Margin="0,18,0,0" AutoGenerateColumns="False">
+        <Menu  VerticalAlignment="Top">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Inventory">
+                <MenuItem x:Name="addItem" Header="Add Item" HorizontalAlignment="Left" Click="AddItemClick"/>
+                <MenuItem x:Name="deleteItem" Header="Delete Item" Height="{Binding Path=Height, RelativeSource={RelativeSource AncestorType=Menu}}" Margin="0" Click="DeleteItemClick"/>
+                <MenuItem x:Name="manageCategories" Header="Manage Categories" Height="{Binding Path=Height, RelativeSource={RelativeSource AncestorType=Menu}}" Margin="0" Click="ManageCategoriesClick"/>
+            </MenuItem>
+            <MenuItem HorizontalAlignment="Right" Margin="0" Padding="0">
+                <MenuItem.Header>
+                    <TextBox x:Name="searchFilter" Text="{Binding Path=SearchText, FallbackValue=Search}" Width="160" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" GotFocus="TextBoxFocus" TextChanged="TextBoxSearch"/>
+                </MenuItem.Header>
+            </MenuItem>
+        </Menu>
+        <DataGrid x:Name="Inventory" ItemsSource="{Binding Items}"  CellEditEnding="Inventory_CellEditEnding" Margin="0,24,0,0" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Price, ValidatesOnExceptions=True}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price, ValidatesOnExceptions=True, StringFormat=0.00}" />
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, ValidatesOnExceptions=True}" />
                 <DataGridTextColumn Header="Unit" Binding="{Binding Unit, ValidatesOnExceptions=True}" />
                 <DataGridTextColumn Header="Value" Binding="{Binding Value, ValidatesOnExceptions=True}" IsReadOnly="True" />

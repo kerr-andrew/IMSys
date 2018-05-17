@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -43,11 +44,7 @@ namespace IMSys
                     break;
                 case "Price":
                     decimal tempd;
-                    if (Decimal.TryParse(t.Text, out tempd))
-                        if (t.Text.IndexOf(".") == -1)
-                        {
-                            t.Text = string.Format("{0:##0.00}", Decimal.Parse(t.Text));
-                        }
+                    if (Decimal.TryParse(t.Text, out tempd))                      
                         item.Price = tempd;
                     break;
                 case "Quantity":
@@ -82,10 +79,39 @@ namespace IMSys
             deleteItemWindow.Show();
         }
 
-        protected void InitializeAlex()
+        private void ManageCategoriesClick(object sender, RoutedEventArgs e)
         {
-
+            ManageCategories manageCategoriesWindow = new ManageCategories();
+            manageCategoriesWindow.Owner = this;
+            manageCategoriesWindow.Show();
         }
 
+        protected void InitializeAlex()
+        {
+            ICollectionView view = CollectionViewSource.GetDefaultView(Inventory.ItemsSource);
+            view.Filter = SearchFilter;
+        }
+
+        private bool SearchFilter(object item)
+        {
+            if(String.IsNullOrEmpty(searchFilter.Text) || (!searchFilter.IsFocused && searchFilter.Text.Equals("Search")))
+                return true;
+            else
+                return ((item as Item).Name.IndexOf(searchFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        public void TextBoxSearch(object sender, RoutedEventArgs e)
+        {
+            if(!searchFilter.Text.Equals("Search"))
+            {
+                CollectionViewSource.GetDefaultView(Inventory.ItemsSource).Refresh();
+            }           
+        }
+
+        public void TextBoxFocus(object sender, RoutedEventArgs e)
+        {
+            searchFilter.Text = "";
+        }
+        
     }
 }
