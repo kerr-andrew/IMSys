@@ -36,6 +36,8 @@ namespace IMSys
 
         public static DataGridRow GetEditingRow(this DataGrid dataGrid)
         {
+            if (dataGrid == null)
+                return null;
             var sIndex = dataGrid.SelectedIndex;
             if (sIndex >= 0)
             {

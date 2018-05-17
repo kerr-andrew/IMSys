@@ -127,7 +127,7 @@ namespace IMSys
         public ObservableCollection<Item> Items { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
         public ObservableCollection<Category> CategorySearch { get; set; }
-        public InventoryViewModel()
+        private InventoryViewModel()
         {
             Items = Item.GetItems();
             Categories = Category.GetCategories();
@@ -145,7 +145,17 @@ namespace IMSys
 
             };
         }
+        private static InventoryViewModel _instance = null;
+        public static InventoryViewModel Model
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new InventoryViewModel();
 
+                return _instance;
+            }
+        }
         public Category SelectedItem { get; set; }
     }
 }

@@ -195,6 +195,10 @@ namespace IMSys.Controls
 
         private void inputBoxes_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.Escape)
+            {
+                (App.Current.Windows[0] as MainWindow).DropClickMenuIfActive();
+            }
             if (e.Key == Key.Enter)
             {
                 var value = Item[ColumnName];

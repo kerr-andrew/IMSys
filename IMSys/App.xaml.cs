@@ -17,11 +17,8 @@ namespace IMSys
         {
             base.OnStartup(e);
 
-            System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
-
             MainWindow window = new MainWindow();
-            InventoryViewModel ivm = new InventoryViewModel();
-            window.DataContext = ivm;
+            window.DataContext = InventoryViewModel.Model;
             MainWindow = window;
 
             window.Initialize();

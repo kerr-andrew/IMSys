@@ -96,6 +96,8 @@ namespace IMSys
 
         public void TextBoxSearch(object sender, EventArgs e)
         {
+            if (Inventory == null)
+                return;
             if (!Inventory.IsEditing())
                 CollectionViewSource.GetDefaultView(Inventory.ItemsSource).Refresh();       
         }

@@ -23,13 +23,8 @@ namespace IMSys
         {
 
             if (clickMenu != null || MainGrid.Children.Contains(clickMenu))
-            {
-                var dgci = GetCurrentCell();
-                if (dgci.IsActiveChangeControl(clickMenu))
-                {
-                    DropClickMenuIfActive();
-                    return;
-                }
+            { 
+                 DropClickMenuIfActive();
             }
         }
         internal void DropClickMenuIfActive()
@@ -68,10 +63,12 @@ namespace IMSys
         {
             var dgci = GetCurrentCell();
             
-            if (!dgci.IsActiveChangeControl(clickMenu))
+            if (dgci.IsActiveChangeControl(clickMenu))
             {
-                DropClickMenuIfActive();
+                return;
             }
+            DropClickMenuIfActive();
+
             if (!dgci.HasValue)
                 return;
             var cell = dgci.Value;
@@ -98,7 +95,6 @@ namespace IMSys
             if (row == null)
                 return;
             var qcc = new ChangeControl<T, IIC>(row);
-
             clickMenu = qcc;
             MainGrid.Children.Add(qcc);
 

@@ -74,5 +74,10 @@ namespace IMSys
         {
             Inventory.CommitEdit();
         }
+
+        private void Inventory_PreparingCellForEdit(object sender, DataGridPreparingCellForEditEventArgs e)
+        {
+
+        }
     }
 }
