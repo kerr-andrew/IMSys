@@ -76,6 +76,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DeleteCategoriesPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DeleteItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,7 +100,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Category.cs" />
+    <Compile Include="Alex\Category.cs" />
+    <Compile Include="DeleteCategoriesPopup.xaml.cs">
+      <DependentUpon>DeleteCategoriesPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeleteItem.xaml.cs">
       <DependentUpon>DeleteItem.xaml</DependentUpon>
     </Compile>
@@ -108,13 +115,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IMSysDBDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Item.cs" />
+    <Compile Include="Alex\Item.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ManageCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddNewCategoriesPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ManageCategories.xaml.cs">
+      <DependentUpon>ManageCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewCategoriesPopup.xaml.cs">
+      <DependentUpon>AddNewCategoriesPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -176,10 +197,13 @@
       <DependentUpon>IMSysDB.mdf</DependentUpon>
     </Content>
     <Content Include="Scripts\0.0.1\GenerateTestData.sql" />
+    <Content Include="Scripts\0.1.0\AddCategory.sql" />
     <Content Include="Scripts\0.1.0\AddRow.sql" />
     <Content Include="Scripts\0.1.0\DeleteItems.sql" />
     <Content Include="Scripts\0.1.0\GetCategory.sql" />
     <Content Include="Scripts\0.1.0\GetItems.sql" />
+    <Content Include="Scripts\0.1.0\RemoveCategory.sql" />
+    <Content Include="Scripts\0.1.0\RenameCategory.sql" />
     <Content Include="Scripts\0.1.0\UpdateRow.sql" />
   </ItemGroup>
   <ItemGroup />

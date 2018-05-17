@@ -72,15 +72,21 @@ namespace IMSys
             ObservableCollection<Category> categories = new ObservableCollection<Category>(data);
             return categories;
         }
+
         public static implicit operator int(Category cat)
         {
             return cat.Id;
         }
+
         public static explicit operator Category(int i)
         {
             return GetCategoryName(i);
         }
 
+        public static int GetId(Category cat)
+        {
+            return cat.Id;
+        }
 
     }
     public class CategoryConverter : IValueConverter
